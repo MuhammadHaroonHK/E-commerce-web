@@ -28,7 +28,7 @@ const Navbar = () => {
         <>
             <nav>
                 <Header/>
-                <div className='flex justify-between items-center w-full px-6 md:px-24 py-4 absolute top-7 bg-white shadow-sm'>
+                <div className='flex justify-between items-center w-full px-6 md:px-24 py-4 relative bg-white shadow-sm'>
                     <h1 className='text-2xl font-bold'>Rabbit</h1>
                     <div className={`md:flex gap-6 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0 shadow-md md:shadow-none transition-all duration-300 ${menuOpen ? 'block' : 'hidden'}`}>
                         <a href="#" className='block py-2 hover:underline'>MAN</a>

@@ -13,7 +13,7 @@ const Search = ({ closeSearch }) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-        <div className='flex flex-col sm:flex-row bg-slate-100 p-4 sm:p-6 relative w-full top-0 z-30 shadow-lg'>
+        <div className='flex flex-col sm:flex-row bg-slate-100 p-4 sm:p-6 absolute w-full top-0 z-30 shadow-lg'>
             <div className='relative w-full sm:w-1/2 vsm:w-[250px] mx-auto'>
                 <input 
                     type="text" 

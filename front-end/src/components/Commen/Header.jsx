@@ -5,13 +5,13 @@ import { FaInstagram } from "react-icons/fa";
 
 const Header = () => {
     return (
-        <div className='bg-red-600 text-white flex justify-between w-[100%] px-20 py-1 absolute'>
+        <div className='bg-red-600 text-white flex justify-between w-[100%] xl:px-20 md:px-20 sm:px-20 py-1 relative vsm:px-2'>
             <div className='gap-3 mt-1 hidden md:flex'>
                 <a href="#" className='text-[18px] hover:text-gray-900'><FaMeta /></a>
                 <a href="#" className='text-[18px] hover:text-gray-900'><FaInstagram /></a>
                 <a href="#" className='text-[18px] hover:text-gray-900'><FaXTwitter /></a>
             </div>
-            <div className='m-auto'>
+            <div className='m-auto text-center'>
                 <p>We ship worldwild - Fast and relaible shipping!</p>
             </div>
             <div className='hidden md:flex'>

@@ -30,10 +30,10 @@ const CartContent = () => {
             <div>
             <h2 className='font-semibold'>{product.name}</h2>
             <p className='text-gray-500 text-sm'>Color: {product.color} | Size: {product.size}</p>
-            <div className='flex items-center'>
-                <button className='border rounded p-1 text-xl font-medium'>-</button>
+            <div className='flex items-center gap-2'>
+                <button className='border rounded px-3 text-xl font-medium'>-</button>
                 <p>{product.quantity}</p>
-                <button className='border rounded p-1 text-xl font-medium'>+</button>
+                <button className='border rounded px-3 text-xl font-medium'>+</button>
             </div>
             </div>
             <div className='flex flex-col justify-end items-end'>
