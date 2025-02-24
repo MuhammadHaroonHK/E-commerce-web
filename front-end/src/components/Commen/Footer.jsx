@@ -63,8 +63,11 @@ const Footer = () => {
                             <p><MdOutlineAddIcCall className='inline mr-2'/> +92 312-3456789</p>
                         </div>
             </div>
+        </div >
+        <div className='border-t-[1px] border-gray-500 mt-10'>
+        <p className='text-center mt-6'>&copy; {new Date().getFullYear()} Haroon. All rights are reserved.</p>
+
         </div>
-        <p className='text-center mt-10'>&copy; {new Date().getFullYear()} Haroon. All rights are reserved.</p>
     </div>
   )
 }

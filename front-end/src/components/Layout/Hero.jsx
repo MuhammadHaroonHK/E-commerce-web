@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Hero = () => {
   return (
     <section>
-        <div className='relative w-full h-[500px] md:h-[500px] lg:h-[500px] sm:h-[300px] vsm:h-[200px] xl:px-14 md:px-14 sm:px-14 vsm:px-2'>
+        <div className='relative w-full h-[500px] md:h-[500px] lg:h-[500px] sm:h-[300px] vsm:h-[200px] xl:px-9 lg:px-6 md:px-5 sm:px-4 vsm:px-2'>
             <div>
                 <img src={heroimg} alt="" className='object-cover w-full h-[500px] md:h-[500px] lg:h-[500px] sm:h-[300px] vsm:h-[200px]'/>
                 <div className='absolute inset-0 bg-opacity-5 flex justify-center items-center'>
@@ -15,7 +15,7 @@ const Hero = () => {
                 <p className='text-gray-100 mb-6 px-6'>Explore our Vacation-ready outfits with fast worldwide shipping.</p>
                 </div>
                 <div>
-                    <Link to="#" className='bg-white text-black px-6 py-2 rounded-sm text-lg'>Shop Now</Link>
+                    <Link to="#" className='bg-white text-black px-6 py-2 rounded-sm text-lg hover:bg-gray-900 hover:text-white'>Shop Now</Link>
                 </div>
                 </div>
 
