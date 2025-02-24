@@ -13,8 +13,8 @@ const Search = ({ closeSearch }) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-        <div className='flex flex-col sm:flex-row bg-slate-100 p-4 sm:p-6 absolute w-full top-0 z-30 shadow-lg'>
-            <div className='relative w-full sm:w-1/2 vsm:w-[250px] mx-auto'>
+        <div className='flex flex-row bg-slate-100 p-4 sm:p-6 absolute w-full top-0 z-30 shadow-lg'>
+            <div className='relative w-full sm:w-1/2 vsm:w-[240px] mx-auto'>
                 <input 
                     type="text" 
                     placeholder='Search'
@@ -26,7 +26,7 @@ const Search = ({ closeSearch }) => {
                     <CiSearch className='w-full h-full' />
                 </button>
             </div>
-            <div className='absolute top-4 sm:top-7 right-4 sm:right-8 cursor-pointer w-6 h-6 sm:w-6 sm:h-6'>
+            <div className='absolute top-4 sm:top-8 right-4 sm:right-8 vsm:top-6 vsm:right-0 cursor-pointer w-6 h-6'>
                 <MdOutlineClose onClick={closeSearch} className='w-full h-full' />
             </div>
         </div>

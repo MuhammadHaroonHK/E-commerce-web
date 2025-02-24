@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <div className=' bottom-0 bg-gray-200 border-t border-gray-400 p-12'>
+    <div className=' bottom-0 bg-gray-200 border-t border-gray-400 xl:p-16 md:p-16 sm:p-16 vsm:p-6'>
         <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 vsm:grid-cols-1 gap-6'>
             <div>
                 <h2 className='font-semibold text-[20px] mb-4'>Newsletter</h2>
@@ -64,6 +64,7 @@ const Footer = () => {
                         </div>
             </div>
         </div>
+        <p className='text-center mt-10'>&copy; {new Date().getFullYear()} Haroon. All rights are reserved.</p>
     </div>
   )
 }
