@@ -2,6 +2,7 @@ import React from 'react'
 import Hero from '../components/Layout/Hero'
 import GenderCollection from '../Products/GenderCollection'
 import NewArival from '../Products/NewArival'
+import BestSeller from '../Products/BestSeller'
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
     <Hero/>
     <GenderCollection/>
     <NewArival/>
+    <BestSeller/>
     </>
   )
 }

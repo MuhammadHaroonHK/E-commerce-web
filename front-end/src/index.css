@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.scrollcss::-webkit-scrollbar {
+    height: 6px;
+}
+
+.scrollcss::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.scrollcss::-webkit-scrollbar-thumb {
+    background: #3c3f42;
+    border-radius: 10px;
 }

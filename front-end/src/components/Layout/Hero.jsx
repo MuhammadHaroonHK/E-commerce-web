@@ -10,7 +10,7 @@ const Hero = () => {
 
         {/* Main area */}
         <div>
-          <img src={heroimg} alt="" className='object-cover w-full h-[500px] md:h-[500px] lg:h-[500px] sm:h-[300px] vsm:h-[200px]' />
+          <img src={heroimg} alt="" className='object-cover filter brightness-50 w-full h-[500px] md:h-[500px] lg:h-[500px] sm:h-[300px] vsm:h-[200px]' />
 
           {/* text container */}
           <div className='absolute inset-0 bg-opacity-5 flex justify-center items-center'>

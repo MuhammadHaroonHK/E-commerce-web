@@ -8,7 +8,7 @@ const GenderCollection = () => {
     <section>
       {/* Container */}
 
-      <div className='flex xl:flex-row justify-center items-center lg:flex-row md:flex-row sm:flex-col vsm:flex-col gap-4 xl:p-10 lg:p-10 md:p-10 sm:p-6 vsm:p-2 '>
+      <div className='flex xl:flex-row justify-center items-center lg:flex-row md:flex-row sm:flex-col vsm:flex-col gap-4 xl:p-10 lg:p-10 md:p-10 sm:py-10 vsm:py-10 '>
 
         {/* Left container */}
 

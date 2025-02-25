@@ -107,7 +107,7 @@ const NewArival = () => {
                 </div>
                 {/* Scrolling Container */}
 
-                <div ref={scrollRef} className='mx-auto overflow-x-scroll flex flex-row gap-2 p-6 mt-10 '>
+                <div ref={scrollRef} className='mx-auto overflow-x-scroll flex flex-row gap-2 p-6 mt-10 scrollcss'>
 
                     {itemsArray.map((product) => (
                         <div key={product._id}>
