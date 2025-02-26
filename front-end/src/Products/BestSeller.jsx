@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {toast, Toaster} from "sonner";
+import ProductGrid from './ProductGrid';
 
 const BestSeller = () => {
 
@@ -189,6 +190,14 @@ const BestSeller = () => {
                     ))}
 
                 </div>
+            </div>
+
+
+            {/* You may know */}
+
+            <div className='py-16 px-2 md:px-14 lg:px-16 xl:px-28'>
+                <h2 className='text-2xl font-bold text-center'>You May Also Know</h2>
+                <ProductGrid/>
             </div>
         </>
     )
