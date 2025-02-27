@@ -85,7 +85,7 @@ const BestSeller = () => {
                             <div key={index} className='flex flex-row sm:flex-col gap-4'>
                                 {product.images.map((image, index) => (
 
-                                    <div>
+                                    <div key={index}>
                                         <img key={index}
                                             src={image.url} alt={image.alt}
                                             onClick={() => setMainImage(image.url)}
@@ -102,9 +102,9 @@ const BestSeller = () => {
 
                     {/* large image */}
                     <div className='w-[250px] h-full md:w-[300px] sm:w-[260px] vsm:w-full'>
-                        {productDetails.map((product) => (
+                        {productDetails.map((product, index) => (
 
-                            <img src={mainImage} alt={product.images[0]?.alt} className='w-full h-full rounded-lg object-cover' />
+                            <img key={index} src={mainImage} alt={product.images[0]?.alt} className='w-full h-full rounded-lg object-cover' />
                         ))}
                     </div>
                 </div>
@@ -112,8 +112,8 @@ const BestSeller = () => {
 
                 {/* Right side */}
                 <div className='bg-gray-50 w-full md:w-1/3'>
-                    {productDetails.map((product) => (
-                        <div>
+                    {productDetails.map((product, index) => (
+                        <div key={index}>
                             <h2 className='text-2xl font-bold text-black'>
                                 {product.name}
                             </h2>
@@ -125,8 +125,8 @@ const BestSeller = () => {
                             <div className='py-2'>
                                 <p className='text-lg'>Colors: </p>
                                 <div className='flex gap-2'>
-                                    {product.colors.map((color) => (
-                                        <button onClick={() => setSelectColor(color)}>
+                                    {product.colors.map((color, index) => (
+                                        <button key={index} onClick={() => setSelectColor(color)}>
                                             <div className={`w-6 h-6 rounded-full border ${selectColor === color ? "border-4 border-black" : ""}`} style={{ backgroundColor: color.toLocaleLowerCase(), filter: "brightness(0.7)" }}></div>
                                         </button>
                                     ))}
@@ -137,9 +137,9 @@ const BestSeller = () => {
                             <div className='py-2'>
                                 <p className='text-lg'>Sizes: </p>
                                 <div className='flex gap-2'>
-                                    {product.sizes.map((size) => (
+                                    {product.sizes.map((size, index) => (
 
-                                        <button onClick={() => setSelectSize(size)}>
+                                        <button key={index} onClick={() => setSelectSize(size)}>
                                             <div className={`w-6 h-6 rounded-sm border ${selectSize === size ? "bg-black text-white" : ""}`}>{size}</div>
                                         </button>
                                     ))}
