@@ -9,9 +9,10 @@ function App() {
     <>
     <Toaster position="top-right" />
     <Routes>
-      <Route path="/" elemen={<UserLayout/>}/>
+      <Route path="/" element={<UserLayout/>}>
       <Route index element={<Home/>} />
       <Route path="/login" element={<Login/>}/>
+      </Route>
     </Routes>
     </>
   )

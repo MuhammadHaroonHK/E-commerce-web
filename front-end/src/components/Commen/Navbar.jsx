@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CiUser, CiShoppingCart, CiSearch } from "react-icons/ci";
 import { MdMenu, MdOutlineClose } from "react-icons/md";
 import Search from './Search';
-import CartDrawer from '../../Pages/CartDrawer.jsx';
+import CartDrawer from '../Layout/CartDrawer.jsx';
 import Header from './Header.jsx';
 
 const Navbar = () => {

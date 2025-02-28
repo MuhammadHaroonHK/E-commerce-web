@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { MdOutlineClose } from "react-icons/md";
-import CartContent from '../components/Cart/CartContent';
+import CartContent from '../Cart/CartContent'
+
 
 const CartDrawer = ({ closeCart }) => {
 
