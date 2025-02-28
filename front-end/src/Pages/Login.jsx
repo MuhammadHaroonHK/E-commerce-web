@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import logImg from '../assets/login.webp'
 
 const Login = () => {
 
@@ -33,7 +32,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder='Enter Your Password' 
           className='border p-1 rounded-md'/>
-          <button type='submit' className='bg-black text-white px-6 py-2 rounded-lg text-lg hover:bg-gray-900 m-10'>Log In</button>
+          <button type='submit' className='bg-black text-white px-6 py-2 rounded-lg text-lg hover:bg-gray-900 my-6 mx-10'>Log In</button>
 
           <p className='text-center mb-3 text-gray-600'>Don't have account? <Link to='/register' className='text-black'>Register</Link></p>
         </form>
