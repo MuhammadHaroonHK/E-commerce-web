@@ -6,7 +6,7 @@ import Home from '../../Pages/Home'
 const UserLayout = () => {
   return (
     <>
-      <Navbar/>
+      
       </>
   )
 }
