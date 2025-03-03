@@ -4,6 +4,7 @@ import { MdMenu, MdOutlineClose } from "react-icons/md";
 import Search from './Search';
 import CartDrawer from '../Layout/CartDrawer.jsx';
 import Header from './Header.jsx';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +46,8 @@ const Navbar = () => {
 
                     {/* Right Side */}
                     <div className='flex gap-4 items-center'>
-                        <a href="#" className='text-black text-xl hover:text-yellow-600'><CiUser /></a>
+                        <Link to="/profile" className='text-black text-xl hover:text-yellow-600'><CiUser />
+                        </Link>
 
                         {/* Cart icon */}
                         <button onClick={cartHandle} className='text-black text-xl hover:text-yellow-600 relative top-2'><CiShoppingCart />
