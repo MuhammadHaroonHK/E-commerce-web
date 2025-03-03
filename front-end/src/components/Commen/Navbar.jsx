@@ -38,7 +38,7 @@ const Navbar = () => {
 
                     {/* Center */}
                     <div className={`md:flex gap-6 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0 shadow-md md:shadow-none transition-all duration-300 ${menuOpen ? 'block' : 'hidden'}`}>
-                        <a href="#" className='block py-2 hover:underline'>MAN</a>
+                        <Link to="/collection" className='block py-2 hover:underline'>MAN</Link>
                         <a href="#" className='block py-2 hover:underline'>WOMAN</a>
                         <a href="#" className='block py-2 hover:underline'>TOP WEAR</a>
                         <a href="#" className='block py-2 hover:underline'>BOTTOM WEAR</a>
