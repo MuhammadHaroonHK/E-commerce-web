@@ -83,7 +83,7 @@ const Filter = () => {
             </h2>
             {catagorie.map((categ) => (
                 <div>
-                    <input type="radio" name='categorie' 
+                    <input type="radio" name='catagorie' 
                     value={categ} 
                     onChange={handleFilter}
                     />
@@ -112,7 +112,7 @@ const Filter = () => {
             <div className='flex flex-wrap'>
                 {colors.map((col) => (
 
-                    <button className='w-6 h-6 rounded-full border-2 cursor-pointer' style={{ backgroundColor: `${col}` }} onClick={handleFilter} value={col} name='color'></button>
+                    <button className='w-6 h-6 rounded-full border-2 cursor-pointer' style={{ backgroundColor: `${col}` }} onClick={handleFilter} value={col} name='colors'></button>
                 ))}
             </div>
 
@@ -125,7 +125,7 @@ const Filter = () => {
             <div>
                 {sizes.map((size) => (
                     <div>
-                        <input type="checkbox" name='size' 
+                        <input type="checkbox" name='sizes' 
                         value={size} 
                         onChange={handleFilter}
                         />
@@ -142,7 +142,7 @@ const Filter = () => {
             <div>
                 {materiale.map((mat) => (
                     <div>
-                        <input type="checkbox" name='material' 
+                        <input type="checkbox" name='materiale' 
                         value={mat} 
                         onChange={handleFilter}
                         />
@@ -160,7 +160,7 @@ const Filter = () => {
             <div>
                 {brands.map((brand) => (
                     <div>
-                        <input type="checkbox" name='brand' 
+                        <input type="checkbox" name='brands' 
                         value={brand} 
                         onChange={handleFilter}
                         />
