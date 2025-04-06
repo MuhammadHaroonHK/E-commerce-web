@@ -25,6 +25,10 @@ const CheckOut = () => {
 
     const nevigate = useNavigate()
 
+    const handlePayment = () => {
+        nevigate("/conform-order");
+    }
+
     const [shippingAddress, setShippingAddress] = useState({
         firstName: "",
         lastName: "",
@@ -111,9 +115,9 @@ const CheckOut = () => {
                         :
                         (<div>
                             <h3 className='text-18 mb-6 mt-3 font-semibold'>Pay with PayPal</h3>
-                            <button className='border items-center w-full py-2 rounded-lg font-bold text-xl shadow-md mb-3 hover:bg-gray-50'><p className='text-blue-700'>Pay<span className='text-yellow-700'>Pal</span></p></button>
+                            <button onClick={handlePayment} className='border items-center w-full py-2 rounded-lg font-bold text-xl shadow-md mb-3 hover:bg-gray-50'><p className='text-blue-700'>Pay<span className='text-yellow-700'>Pal</span></p></button>
 
-                            <button className='w-full bg-black text-white py-2 rounded-lg font-semibold text-lg'>Created Card</button>
+                            <button className='w-full bg-black text-white py-2 rounded-lg font-semibold text-lg'>Creadet Card</button>
                         </div>)}
                 </form>
             </div>

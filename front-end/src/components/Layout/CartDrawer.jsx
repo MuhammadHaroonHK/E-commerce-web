@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { MdOutlineClose } from "react-icons/md";
 import CartContent from '../Cart/CartContent'
+import { useNavigate } from 'react-router-dom';
 
 
 const CartDrawer = ({ closeCart }) => {
@@ -9,6 +10,12 @@ const CartDrawer = ({ closeCart }) => {
     const closeHandle = () => {
         setIsClose(!isclose);
         closeCart(false)
+    }
+    const navigate=useNavigate();
+
+    const checkHandler =() => {
+        navigate("/checkout");
+        setIsClose(!isclose)
     }
 
     return (
@@ -27,7 +34,7 @@ const CartDrawer = ({ closeCart }) => {
 
                     {/* Bellow Section */}
                     <div className='p-4 absolute bottom-0 items-center'>
-                        <button className='bg-black text-white rounded-lg py-3 w-full'>Check Out</button>
+                        <button onClick={checkHandler} className='bg-black text-white rounded-lg py-3 w-full'>Check Out</button>
                         <p className='text-sm tracking-tighter mt-2 text-gray-500 text-center'>Shipping, Taxes, and Discounts</p>
                     </div>
                 </div>}

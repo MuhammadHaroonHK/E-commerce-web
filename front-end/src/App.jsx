@@ -7,6 +7,7 @@ import Register from "./Pages/Register"
 import Profile from "./Pages/Profile"
 import Collection from "./Pages/Collection"
 import CheckOut from "./Pages/CheckOut"
+import ConformPage from "./Pages/ConformPage"
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/collection" element={<Collection/>} />
       <Route path="/checkout" element={<CheckOut/>}/>
+      <Route path="/conform-order" element={<ConformPage/>} />
       </Route>
     </Routes>
     </>
