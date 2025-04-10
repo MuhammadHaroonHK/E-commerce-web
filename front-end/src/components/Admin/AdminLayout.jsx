@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa6';
 import AdminSidebar from './AdminSidebar';
 import AdminMainContent from './AdminMainContent';
+import { Outlet } from 'react-router-dom';
 
 const AdminLayout = () => {
 
@@ -37,7 +38,7 @@ const AdminLayout = () => {
         </div>
         {/* Main content */}
 
-        <AdminMainContent/>
+        <Outlet/>
 
         </div>
     )
