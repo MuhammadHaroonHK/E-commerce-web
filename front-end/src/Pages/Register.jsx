@@ -24,7 +24,7 @@ const Register = () => {
                         <input type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder='Enter Your Email'
+                            placeholder='Enter Your Name'
                             className='border p-1 rounded-md' />
                         
                         

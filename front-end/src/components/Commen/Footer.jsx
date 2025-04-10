@@ -20,8 +20,8 @@ const Footer = () => {
 
                     {/* Input form */}
                     <form className='flex xl:flex-row md:flex-row sm:flex-row vsm:flex-col xl:gap-0 md:gap-0 sm:gap-0 vsm:gap-4'>
-                        <input type="email" placeholder='Enter your Email' required className='border border-gray-600 rounded-sm p-1.5 focus:outline-none xl:rounded-l-lg md:rounded-l-lg sm:rounded-l-lg vsm:rounded-lg' />
-                        <button className='bg-black text-white p-1.5 xl:rounded-r-lg md:rounded-r-lg sm:rounded-r-lg vsm:rounded-lg'>Subscribe</button>
+                        <input type="email" placeholder='Enter your Email' required className='border border-gray-600 p-1.5 focus:outline-none rounded-lg sm:rounded-none' />
+                        <button className='bg-black text-white p-1.5 rounded-lg sm:rounded-none'>Subscribe</button>
                     </form>
                 </div>
 

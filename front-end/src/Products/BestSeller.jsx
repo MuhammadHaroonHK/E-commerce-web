@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {toast, Toaster} from "sonner";
+import { toast, Toaster } from "sonner";
 import ProductGrid from './ProductGrid';
 
 const BestSeller = () => {
@@ -34,22 +34,22 @@ const BestSeller = () => {
     const [quantity, setQuantity] = useState(1);
     const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
-    const handleQuantity=(action) => {
-            if(action == "plus") setQuantity((prev) =>prev + 1);
-            if(action == "minus" && quantity >1) setQuantity((prev) => prev -1)
+    const handleQuantity = (action) => {
+        if (action == "plus") setQuantity((prev) => prev + 1);
+        if (action == "minus" && quantity > 1) setQuantity((prev) => prev - 1)
     }
 
-    const handleCartBtn =() => {
-        if(!selectColor || !selectSize) {
+    const handleCartBtn = () => {
+        if (!selectColor || !selectSize) {
             toast.error("Please select size and color...", {
-                duration:2000,
+                duration: 2000,
             })
             return;
         }
-        
+
         setIsBtnDisabled(true);
-        
-        setTimeout(() =>{
+
+        setTimeout(() => {
             toast.success("Product added succefully...", {
                 duration: 2000,
             })
@@ -150,11 +150,11 @@ const BestSeller = () => {
                             <div className='py-2'>
                                 <p className='text-lg'>Quantity: </p>
                                 <div className='flex gap-2 items-center'>
-                                    <button onClick={() => handleQuantity("minus")} 
-                                    className='text-lg border px-2'>-</button>
+                                    <button onClick={() => handleQuantity("minus")}
+                                        className='text-lg border px-2'>-</button>
                                     <p>{quantity}</p>
                                     <button onClick={() => handleQuantity("plus")}
-                                    className='text-lg border px-2'>+</button>
+                                        className='text-lg border px-2'>+</button>
 
                                 </div>
 
@@ -164,8 +164,8 @@ const BestSeller = () => {
 
                             <div className='py-2'>
                                 <button onClick={handleCartBtn}
-                                disabled={isBtnDisabled} 
-                                className={`text-center font-bold bg-black text-white w-full p-2 rounded-md ${isBtnDisabled ? "cursor-not-allowed opacity-50" : "hover:bg-gray-900"}`}>
+                                    disabled={isBtnDisabled}
+                                    className={`text-center font-bold bg-black text-white w-full p-2 rounded-md ${isBtnDisabled ? "cursor-not-allowed opacity-50" : "hover:bg-gray-900"}`}>
                                     {isBtnDisabled ? "Adding..." : "Add To Cart"}</button>
                             </div>
 
@@ -197,7 +197,7 @@ const BestSeller = () => {
 
             <div className='py-16 px-2 md:px-14 lg:px-16 xl:px-52'>
                 <h2 className='text-2xl font-bold text-center'>You May Also Know</h2>
-                <ProductGrid/>
+                <ProductGrid />
             </div>
         </>
     )

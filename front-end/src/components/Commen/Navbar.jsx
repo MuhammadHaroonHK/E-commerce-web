@@ -34,7 +34,7 @@ const Navbar = () => {
                 <div className='flex justify-between items-center w-full px-6 md:px-24 py-4 relative bg-white z-20 shadow-sm'>
 
                     {/* Left Side */}
-                    <h1 className='text-2xl font-bold'>Rabbit</h1>
+                    <Link to={"/"} className='text-2xl font-bold cursor-pointer'>Rabbit</Link>
 
                     {/* Center */}
                     <div className={`md:flex gap-6 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0 shadow-md md:shadow-none transition-all duration-300 ${menuOpen ? 'block' : 'hidden'}`}>
@@ -46,6 +46,7 @@ const Navbar = () => {
 
                     {/* Right Side */}
                     <div className='flex gap-4 items-center'>
+                        <Link to={"/admin"} className='text-white bg-black rounded-lg px-2 py-1'>Admin</Link>
                         <Link to="/profile" className='text-black text-xl hover:text-yellow-600'><CiUser />
                         </Link>
 
