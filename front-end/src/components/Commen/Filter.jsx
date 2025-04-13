@@ -82,7 +82,7 @@ const Filter = () => {
                 Categories
             </h2>
             {catagorie.map((categ) => (
-                <div>
+                <div key={categ}>
                     <input type="radio" name='catagorie'
                         value={categ}
                         onChange={handleFilter}
@@ -96,7 +96,7 @@ const Filter = () => {
                 Gender
             </h2>
             {gender.map((gen) => (
-                <div>
+                <div key={gen}>
                     <input type="radio" name='gender'
                         value={gen}
                         onChange={handleFilter}
@@ -112,7 +112,7 @@ const Filter = () => {
             <div className='flex flex-wrap'>
                 {colors.map((col) => (
 
-                    <button className='w-6 h-6 rounded-full border-2 cursor-pointer' style={{ backgroundColor: `${col}` }} onClick={handleFilter} value={col} name='colors'></button>
+                    <button key={col} className='w-6 h-6 rounded-full border-2 cursor-pointer' style={{ backgroundColor: `${col}` }} onClick={handleFilter} value={col} name='colors'></button>
                 ))}
             </div>
 
@@ -124,7 +124,7 @@ const Filter = () => {
 
             <div>
                 {sizes.map((size) => (
-                    <div>
+                    <div key={size}>
                         <input type="checkbox" name='sizes'
                             value={size}
                             onChange={handleFilter}
@@ -141,7 +141,7 @@ const Filter = () => {
             </h2>
             <div>
                 {materiale.map((mat) => (
-                    <div>
+                    <div key={mat}>
                         <input type="checkbox" name='materiale'
                             value={mat}
                             onChange={handleFilter}
@@ -159,7 +159,7 @@ const Filter = () => {
             </h2>
             <div>
                 {brands.map((brand) => (
-                    <div>
+                    <div key={brand}>
                         <input type="checkbox" name='brands'
                             value={brand}
                             onChange={handleFilter}

@@ -66,12 +66,6 @@ const BestSeller = () => {
 
     return (
         <>
-            <div className='text-center'>
-                <div className='mt-8'>
-                    <h2 className='text-3xl font-bold'>Best Seller</h2>
-                </div>
-            </div>
-
             {/* container */}
             <div className='mx-auto p-2 sm:p-4 md:p-4 lg:p-8 flex xl:flex-row lg:flex-row md:flex-row sm:flex-row vsm:flex-col justify-center gap-4'>
 
@@ -81,21 +75,21 @@ const BestSeller = () => {
                     {/* small two images */}
 
                     {productDetails.map((product, index) => (
-                        <>
-                            <div key={index} className='flex flex-row sm:flex-col gap-4'>
-                                {product.images.map((image, index) => (
 
-                                    <div key={index}>
-                                        <img key={index}
-                                            src={image.url} alt={image.alt}
-                                            onClick={() => setMainImage(image.url)}
-                                            className={`min-w-16 h-16 object-cover rounded-lg cursor-pointer ${mainImage === image.url ? "border-black border-[2px]" : ""}`} />
-                                    </div>
-                                ))}
+                        <div key={index} className='flex flex-row sm:flex-col gap-4'>
+                            {product.images.map((image) => (
 
-                            </div>
+                                <div key={image.url}>
+                                    <img key={index}
+                                        src={image.url} alt={image.alt}
+                                        onClick={() => setMainImage(image.url)}
+                                        className={`min-w-16 h-16 object-cover rounded-lg cursor-pointer ${mainImage === image.url ? "border-black border-[2px]" : ""}`} />
+                                </div>
+                            ))}
 
-                        </>
+                        </div>
+
+
                     ))}
 
 
@@ -125,8 +119,8 @@ const BestSeller = () => {
                             <div className='py-2'>
                                 <p className='text-lg'>Colors: </p>
                                 <div className='flex gap-2'>
-                                    {product.colors.map((color, index) => (
-                                        <button key={index} onClick={() => setSelectColor(color)}>
+                                    {product.colors.map((color) => (
+                                        <button key={color} onClick={() => setSelectColor(color)}>
                                             <div className={`w-6 h-6 rounded-full border ${selectColor === color ? "border-4 border-black" : ""}`} style={{ backgroundColor: color.toLocaleLowerCase(), filter: "brightness(0.7)" }}></div>
                                         </button>
                                     ))}
@@ -137,9 +131,9 @@ const BestSeller = () => {
                             <div className='py-2'>
                                 <p className='text-lg'>Sizes: </p>
                                 <div className='flex gap-2'>
-                                    {product.sizes.map((size, index) => (
+                                    {product.sizes.map((size) => (
 
-                                        <button key={index} onClick={() => setSelectSize(size)}>
+                                        <button key={size} onClick={() => setSelectSize(size)}>
                                             <div className={`w-6 h-6 rounded-sm border ${selectSize === size ? "bg-black text-white" : ""}`}>{size}</div>
                                         </button>
                                     ))}

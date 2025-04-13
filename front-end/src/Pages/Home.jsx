@@ -13,6 +13,9 @@ const Home = () => {
       <Hero />
       <GenderCollection />
       <NewArival />
+      <div className='mt-8 text-center'>
+        <h2 className='text-3xl font-bold'>Best Seller</h2>
+      </div>
       <BestSeller />
       <div className='py-2 px-2 md:px-14 lg:px-16 xl:px-28 mt-6'>
         <h2 className='text-2xl font-bold text-center'>Top Wear for Women's</h2>

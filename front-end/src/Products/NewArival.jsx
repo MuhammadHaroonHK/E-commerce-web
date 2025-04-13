@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { CiSquareChevLeft } from "react-icons/ci";
 import { CiSquareChevRight } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 
 const NewArival = () => {
 
@@ -112,11 +113,13 @@ const NewArival = () => {
                         {itemsArray.map((product) => (
                             <div key={product._id}>
                                 <div className='min-w-64 h-72 relative'>
-                                    <img src={product.img[0]?.url} alt={product.img[0]?.alt || product.name} className='w-full h-full object-cover' />
-                                    <div className='absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-white/30 text-black w-64 p-3'>
-                                        <h2 className='font-bold'>{product.name}</h2>
-                                        <p>$ {product.price}</p>
-                                    </div>
+                                    <Link to={`/product/${product._id}`}>
+                                        <img src={product.img[0]?.url} alt={product.img[0]?.alt || product.name} className='w-full h-full object-cover' />
+                                        <div className='absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-white/30 text-black w-64 p-3'>
+                                            <h2 className='font-bold'>{product.name}</h2>
+                                            <p>$ {product.price}</p>
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                         ))}

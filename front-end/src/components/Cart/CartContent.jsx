@@ -1,9 +1,10 @@
 import React from 'react'
 import { MdDeleteOutline } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const CartContent = () => {
     const products = [{
-        productId: 1,
+        _id: 1,
         name: "T-Shirt",
         price: 15,
         quantity: 1,
@@ -12,7 +13,7 @@ const CartContent = () => {
         img: "https://picsum.photos/200?random=1"
     },
     {
-        productId: 2,
+        _id: 2,
         name: "Jeans",
         price: 10,
         quantity: 1,
@@ -32,7 +33,9 @@ const CartContent = () => {
 
                     {/* container */}
                     <div className='flex items-start gap-2'>
-                        <img src={product.img} alt={product.name} className='w-24' />
+                        <Link to={`/product/${product._id}`}>
+                            <img src={product.img} alt={product.name} className='w-24' />
+                        </Link>
 
                         {/* Left side */}
                         <div>
