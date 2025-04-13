@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Filter = () => {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const catagorie = ["Top Wear", "Bottom Wear"];
     const gender = ["Men", "Women"];
     const colors = ["blue", "black", "green", "yellow", "red"];
@@ -14,42 +14,42 @@ const Filter = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [filter, setFilter] = useState({
-        catagorie:"",
-        gender:"",
-        colors:"",
-        sizes:[],
-        materiale:[],
-        brands:[],
+        catagorie: "",
+        gender: "",
+        colors: "",
+        sizes: [],
+        materiale: [],
+        brands: [],
     });
 
     useEffect(() => {
-        const params=Object.fromEntries([...searchParams]);
+        const params = Object.fromEntries([...searchParams]);
 
         setFilter({
-            catagorie:params.catagorie || "",
-            gender:params.gender || "",
-            colors:params.colors || "",
-            sizes:params.sizes ? params.sizes.split(",") : [],
-            materiale:params.materiale ? params.materiale.split(",") : [],
-            brands:params.brands ? params.brands.split(",") : [],
+            catagorie: params.catagorie || "",
+            gender: params.gender || "",
+            colors: params.colors || "",
+            sizes: params.sizes ? params.sizes.split(",") : [],
+            materiale: params.materiale ? params.materiale.split(",") : [],
+            brands: params.brands ? params.brands.split(",") : [],
         });
 
     }, [searchParams]);
 
-    const handleFilter=(e) => {
-        const {name, value, checked, type}=e.target;
+    const handleFilter = (e) => {
+        const { name, value, checked, type } = e.target;
         // console.log({name, value, checked, type});
 
-        let newfilter={...filter};
+        let newfilter = { ...filter };
 
-        if(type === "checkbox") {
-            if(checked) {
+        if (type === "checkbox") {
+            if (checked) {
                 newfilter[name] = [...(newfilter[name] || []), value]
             } else {
                 newfilter[name] = newfilter[name].filter((item) => item !== value);
             }
         } else {
-            newfilter[name]=value;
+            newfilter[name] = value;
         }
 
         setFilter(newfilter);
@@ -58,11 +58,11 @@ const Filter = () => {
     }
 
     const updateURL = (newfilter) => {
-        const params=new URLSearchParams();
+        const params = new URLSearchParams();
         Object.keys(newfilter).forEach((key) => {
-            if(Array.isArray(newfilter[key]) && newfilter[key].length > 0) {
+            if (Array.isArray(newfilter[key]) && newfilter[key].length > 0) {
                 params.set(key, newfilter[key].join(","));
-            } else if(newfilter[key]) {
+            } else if (newfilter[key]) {
                 params.set(key, newfilter[key]);
             }
         });
@@ -83,9 +83,9 @@ const Filter = () => {
             </h2>
             {catagorie.map((categ) => (
                 <div>
-                    <input type="radio" name='catagorie' 
-                    value={categ} 
-                    onChange={handleFilter}
+                    <input type="radio" name='catagorie'
+                        value={categ}
+                        onChange={handleFilter}
                     />
                     <label className='ml-2'>{categ}</label>
                 </div>
@@ -97,9 +97,9 @@ const Filter = () => {
             </h2>
             {gender.map((gen) => (
                 <div>
-                    <input type="radio" name='gender' 
-                    value={gen} 
-                    onChange={handleFilter}
+                    <input type="radio" name='gender'
+                        value={gen}
+                        onChange={handleFilter}
                     />
                     <label className='ml-2'>{gen}</label>
                 </div>
@@ -125,9 +125,9 @@ const Filter = () => {
             <div>
                 {sizes.map((size) => (
                     <div>
-                        <input type="checkbox" name='sizes' 
-                        value={size} 
-                        onChange={handleFilter}
+                        <input type="checkbox" name='sizes'
+                            value={size}
+                            onChange={handleFilter}
                         />
                         <label className='ml-2'>{size}</label>
                     </div>
@@ -142,9 +142,9 @@ const Filter = () => {
             <div>
                 {materiale.map((mat) => (
                     <div>
-                        <input type="checkbox" name='materiale' 
-                        value={mat} 
-                        onChange={handleFilter}
+                        <input type="checkbox" name='materiale'
+                            value={mat}
+                            onChange={handleFilter}
                         />
                         <label className='ml-2'>{mat}</label>
                     </div>
@@ -160,9 +160,9 @@ const Filter = () => {
             <div>
                 {brands.map((brand) => (
                     <div>
-                        <input type="checkbox" name='brands' 
-                        value={brand} 
-                        onChange={handleFilter}
+                        <input type="checkbox" name='brands'
+                            value={brand}
+                            onChange={handleFilter}
                         />
                         <label className='ml-2'>{brand}</label>
                     </div>

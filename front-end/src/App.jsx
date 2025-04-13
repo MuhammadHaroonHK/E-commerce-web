@@ -12,9 +12,11 @@ import OrderDetails from "./Pages/OrderDetails"
 import MyOrders from "./Pages/MyOrders"
 import BestSeller from "./Products/BestSeller"
 import AdminLayout from "./components/Admin/AdminLayout"
-import AdminSidebar from "./components/Admin/AdminSidebar"
 import UserMange from "./components/Admin/UserMange"
 import AdminMainContent from "./components/Admin/AdminMainContent"
+import ProductManagement from "./components/Admin/ProductManagement"
+import EditProduct from "./components/Admin/EditProduct"
+import OrderManagement from "./components/Admin/OrderManagement"
 function App() {
 
   return (
@@ -37,6 +39,9 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminMainContent />} />
           <Route path="users" element={<UserMange />} />
+          <Route path="products" element={<ProductManagement />} />
+          <Route path="products/:id/edit" element={<EditProduct />} />
+          <Route path="Orders" element={<OrderManagement />} />
         </Route>
 
       </Routes>

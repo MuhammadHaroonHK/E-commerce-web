@@ -34,8 +34,8 @@ const Collection = () => {
     <div className='flex'>
 
       {/* Left Filter Side */}
-      <div 
-        ref={filterRef} 
+      <div
+        ref={filterRef}
         className={`w-1/2 sm:w-1/5 border-r-2 p-2 sm:block ${isOpenFilter ? "sm:block" : "hidden"}`}
       >
         <Filter />
@@ -52,7 +52,7 @@ const Collection = () => {
         </div>
 
         <div className='flex justify-end mr-8 mt-8'>
-          <Popularity/>
+          <Popularity />
         </div>
 
 

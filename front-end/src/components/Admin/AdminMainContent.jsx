@@ -71,15 +71,22 @@ const AdminMainContent = () => {
                             <th className='px-4 py-2'>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {Products.map((product) => (
-                            <tr key={product.orderId}>
-                                <td className='border-b px-4 py-2'>{product.orderId}</td>
-                                <td className='border-b px-4 py-2'>{product.user}</td>
-                                <td className='border-b px-4 py-2'>{product.totalPrice}</td>
-                                <td className='border-b px-4 py-2'>{product.status}</td>
+                    <tbody className='text-gray-700'>
+                        {Products.length > 0 ? (
+                            Products.map((product) => (
+                                <tr key={product.orderId}>
+                                    <td className='border-b px-4 py-2'>{product.orderId}</td>
+                                    <td className='border-b px-4 py-2'>{product.user}</td>
+                                    <td className='border-b px-4 py-2'>{product.totalPrice}</td>
+                                    <td className='border-b px-4 py-2'>{product.status}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan={4} className='text-center text-gray-500 p-4'>No Recent Orders Found.</td>
                             </tr>
-                        ))}
+                        )}
+
                     </tbody>
                 </table>
             </div>

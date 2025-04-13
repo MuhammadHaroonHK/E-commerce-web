@@ -10,16 +10,16 @@ import FinalSection from '../Products/FinalSection'
 const Home = () => {
   return (
     <>
-    <Hero/>
-    <GenderCollection/>
-    <NewArival/>
-    <BestSeller/>
-    <div className='py-2 px-2 md:px-14 lg:px-16 xl:px-28 mt-6'>
-                <h2 className='text-2xl font-bold text-center'>Top Wear for Women's</h2>
-                </div>
-    <FeaturedCollection/>
-    <FeaturesSection/>
-    <FinalSection/>
+      <Hero />
+      <GenderCollection />
+      <NewArival />
+      <BestSeller />
+      <div className='py-2 px-2 md:px-14 lg:px-16 xl:px-28 mt-6'>
+        <h2 className='text-2xl font-bold text-center'>Top Wear for Women's</h2>
+      </div>
+      <FeaturedCollection />
+      <FeaturesSection />
+      <FinalSection />
     </>
   )
 }

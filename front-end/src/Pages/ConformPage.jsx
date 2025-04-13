@@ -69,8 +69,8 @@ const ConformPage = () => {
                     </div>
 
                     <div>
-                    <h2 className='font-bold text-[22px]'>Address</h2>
-                    <p className='text-gray-600'>Peshawar, Pakistan</p>
+                        <h2 className='font-bold text-[22px]'>Address</h2>
+                        <p className='text-gray-600'>Peshawar, Pakistan</p>
                     </div>
                 </div>
             </div>

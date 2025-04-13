@@ -95,7 +95,7 @@ const OrderDetails = () => {
 
                             </thead>
                             {/* Table Body */}
-                            <tbody>
+                            <tbody className='text-gray-700'>
                                 {OrderDetails.orderItems.map((item) => (
                                     <tr key={item.productId} className='border-b'>
 

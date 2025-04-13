@@ -9,7 +9,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ "Name":name,"Email": email, "Password": password })
+        console.log({ "Name": name, "Email": email, "Password": password })
     }
     return (
         <div className='mx-auto'>
@@ -23,20 +23,23 @@ const Register = () => {
                         <label className='font-semibold text-lg'>Name</label>
                         <input type="text"
                             value={name}
+                            required
                             onChange={(e) => setName(e.target.value)}
                             placeholder='Enter Your Name'
                             className='border p-1 rounded-md' />
-                        
-                        
+
+
                         <label className='font-semibold text-lg pt-3'>Email</label>
                         <input type="email"
                             value={email}
+                            required
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder='Enter Your Email'
                             className='border p-1 rounded-md' />
                         <label className='font-semibold text-lg pt-3'>Password</label>
                         <input type="password"
                             value={password}
+                            required
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder='Enter Your Password'
                             className='border p-1 rounded-md' />

@@ -55,6 +55,7 @@ const CheckOut = () => {
                 <form onSubmit={handleSubmit}>
                     <label>Email</label><br />
                     <input type="email"
+                        required
                         defaultValue="haroonhk059@gmail.com"
                         className='border bg-gray-50 w-full p-1 mb-3' />
 
@@ -64,13 +65,15 @@ const CheckOut = () => {
                             <label>First Name</label> <br />
                             <input type="text" className='border p-1 w-full'
                                 value={shippingAddress.firstName}
+                                required
                                 onChange={(e) => setShippingAddress({ ...shippingAddress, firstName: e.target.value })} />
 
                         </div>
                         <div className='w-full'>
                             <label>Last Name</label> <br />
                             <input type="text" className='border p-1 w-full mb-3'
-                                value={shippingAddress.LastName}
+                                value={shippingAddress.lastName}
+                                required
                                 onChange={(e) => setShippingAddress({ ...shippingAddress, lastName: e.target.value })} />
 
                         </div>
@@ -80,6 +83,7 @@ const CheckOut = () => {
                     <input type="text"
                         className='border w-full p-1 mb-3'
                         value={shippingAddress.address}
+                        required
                         onChange={(e) => setShippingAddress({ ...shippingAddress, address: e.target.value })} />
 
                     <div className='flex flex-col sm:flex-row w-full gap-8'>
@@ -87,6 +91,7 @@ const CheckOut = () => {
                             <label>City</label> <br />
                             <input type="text" className='border p-1 w-full'
                                 value={shippingAddress.city}
+                                required
                                 onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })} />
 
                         </div>
@@ -94,6 +99,7 @@ const CheckOut = () => {
                             <label>Postal Code</label> <br />
                             <input type="number" className='border p-1 w-full mb-3'
                                 value={shippingAddress.postalCode}
+                                required
                                 onChange={(e) => setShippingAddress({ ...shippingAddress, postalCode: e.target.value })} />
 
                         </div>
@@ -103,12 +109,14 @@ const CheckOut = () => {
                     <input type="text"
                         className='border w-full p-1 mb-3'
                         value={shippingAddress.country}
+                        required
                         onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })} />
 
                     <label>Phone</label><br />
                     <input type="tel"
                         className='border w-full p-1 mb-3'
                         value={shippingAddress.phone}
+                        required
                         onChange={(e) => setShippingAddress({ ...shippingAddress, phone: e.target.value })} />
 
                     {!checked ? (<button type='submit' className='w-full bg-black text-white py-2 rounded-lg'>Continue To Payment</button>)
@@ -124,13 +132,13 @@ const CheckOut = () => {
 
             {/* Right Side */}
             <div className='w-full md:w-1/2 p-4 bg-gray-50 rounded-lg shadow-lg mt-6 md:mt-0'>
-            <div className='border-b p-3'>
-                <h2 className='font-bold text-xl'>Order Summary</h2>
+                <div className='border-b p-3'>
+                    <h2 className='font-bold text-xl'>Order Summary</h2>
 
-            </div>
+                </div>
 
                 {products.map((product, key) => (
-                    
+
                     <div key={key} className='flex items-center justify-between mt-6 p-3 border-b'>
 
                         {/* Left side */}

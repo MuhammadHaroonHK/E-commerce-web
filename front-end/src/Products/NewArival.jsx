@@ -100,28 +100,28 @@ const NewArival = () => {
                 {/* container */}
                 <div className='relative'>
 
-                {/* Left Right Buttons */}
-                <div className='flex gap-2 absolute -top-4 right-0'>
-                    <CiSquareChevLeft className='w-8 h-8 cursor-pointer' onClick={scrollLeft} />
-                    <CiSquareChevRight className='w-8 h-8 cursor-pointer' onClick={scrollRight} />
-                </div>
-                {/* Scrolling Container */}
+                    {/* Left Right Buttons */}
+                    <div className='flex gap-2 absolute -top-4 right-0'>
+                        <CiSquareChevLeft className='w-8 h-8 cursor-pointer' onClick={scrollLeft} />
+                        <CiSquareChevRight className='w-8 h-8 cursor-pointer' onClick={scrollRight} />
+                    </div>
+                    {/* Scrolling Container */}
 
-                <div ref={scrollRef} className='mx-auto overflow-x-scroll flex flex-row gap-2 p-6 mt-10 scrollcss'>
+                    <div ref={scrollRef} className='mx-auto overflow-x-scroll flex flex-row gap-2 p-6 mt-10 scrollcss'>
 
-                    {itemsArray.map((product) => (
-                        <div key={product._id}>
-                            <div className='min-w-64 h-72 relative'>
-                                <img src={product.img[0]?.url} alt={product.img[0]?.alt || product.name} className='w-full h-full object-cover' />
-                                <div className='absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-white/30 text-black w-64 p-3'>
-                                    <h2 className='font-bold'>{product.name}</h2>
-                                    <p>$ {product.price}</p>
+                        {itemsArray.map((product) => (
+                            <div key={product._id}>
+                                <div className='min-w-64 h-72 relative'>
+                                    <img src={product.img[0]?.url} alt={product.img[0]?.alt || product.name} className='w-full h-full object-cover' />
+                                    <div className='absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-white/30 text-black w-64 p-3'>
+                                        <h2 className='font-bold'>{product.name}</h2>
+                                        <p>$ {product.price}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
 
-                </div>
+                    </div>
                 </div>
 
 

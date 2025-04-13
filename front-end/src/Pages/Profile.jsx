@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom'
 import MyOrders from './MyOrders'
 
 const Profile = () => {
-    const nevigate=useNavigate()
-    const handleLogout=() => {
+    const nevigate = useNavigate()
+    const handleLogout = () => {
         nevigate("/login");
     }
-    
+
     return (
         <div className='p-1 md:p-4'>
             {/* Left side */}
@@ -16,11 +16,11 @@ const Profile = () => {
                     <p className='text-gray-600 my-3'>haroonhk059@gmail.com</p>
 
                     <button className='border-red-900 border-[1px] py-2 px-4 rounded-lg bg-red-500 text-white sm:w-full hover:bg-red-900'
-                    onClick={handleLogout}>Log Out</button>
+                        onClick={handleLogout}>Log Out</button>
                 </div>
 
-            {/* Right side */}
-            <MyOrders/>
+                {/* Right side */}
+                <MyOrders />
             </div>
         </div>
     )

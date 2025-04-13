@@ -11,9 +11,9 @@ const CartDrawer = ({ closeCart }) => {
         setIsClose(!isclose);
         closeCart(false)
     }
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
-    const checkHandler =() => {
+    const checkHandler = () => {
         navigate("/checkout");
         setIsClose(!isclose)
     }
