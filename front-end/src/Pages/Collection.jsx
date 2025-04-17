@@ -46,7 +46,7 @@ const Collection = () => {
         <h2 className='font-bold text-2xl'>All Collections</h2>
 
         {/* Filter Icon */}
-        <div className='flex justify-center items-center cursor-pointer mt-6 sm:hidden'>
+        <div className='flex justify-center items-center cursor-pointer mt-6 sm:hidden border'>
           <RiFilterLine className='w-6 h-6' />
           <button onClick={openToggle} className='font-semibold text-lg'>Filter</button>
         </div>
