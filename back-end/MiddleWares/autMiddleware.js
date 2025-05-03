@@ -18,6 +18,15 @@ const protect= async (req, res, next) =>{
     } else{
         res.status(401).json({msg:"no token provided"})
     }
+};
+
+//check role, only admin can create product
+const admin=(req, res, next) => {
+    if(req.user && req.user.role === "admin") {
+        next()
+    } else{
+        res.status(403).json({msg:"Not authorize, Only admin can create product"})
+    }
 }
 
-module.exports={protect}
+module.exports={protect, admin}
