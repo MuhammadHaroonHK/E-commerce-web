@@ -133,6 +133,84 @@ router.delete("/:id", protect, admin, async (req, res) => {
         console.log(error);
         res.status(500).json({msg: "Server Error"})
     }
-})
+});
+
+//@route = GET: api/products
+//@desc = filter the products
+//@access = Public
+router.get("/", async (req, res) => {
+    try {
+        const {
+            catagory, brand, color, size, gender,
+            collection, sortBy, search, material, limit
+        } = req.query;
+
+        let query = {};
+
+        // Filter Logic
+        if (collection && collection.toLowerCase() !== "all") {
+            query.collection = collection;
+        }
+
+        if (catagory && catagory.toLowerCase() !== "all") {
+            query.catagory = catagory;
+        }
+
+        if (material) {
+            query.material = { $in: material.split(",") };
+        }
+
+        if (brand) {
+            query.brand = { $in: brand.split(",") };
+        }
+
+        if (size) {
+            query.size = { $in: size.split(",") };
+        }
+
+        if (color) {
+            query.color = { $in: [color] };
+        }
+
+        if (gender) {
+            query.gender = gender;
+        }
+
+        // Search Logic
+        if (search) {
+            query.$or = [
+                { name: { $regex: search, $options: "i" } },
+                { description: { $regex: search, $options: "i" } },
+            ];
+        }
+
+        // Sort Logic
+        let sort = {};
+        if (sortBy) {
+            switch (sortBy) {
+                case "priceAsc":
+                    sort = { price: 1 };
+                    break;
+                case "priceDesc":
+                    sort = { price: -1 };
+                    break;
+                case "popularity":
+                    sort = { rating: -1 };
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        const limitValue = limit ? parseInt(limit) : 0;
+
+        const products = await Product.find(query).sort(sort).limit(limitValue);
+        res.json(products);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Server Error" });
+    }
+});
+
 
 module.exports = router;
