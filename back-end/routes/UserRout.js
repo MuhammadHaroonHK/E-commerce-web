@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User.js');
-const {protect} = require('../MiddleWares/autMiddleware.js')
+const { protect } = require('../MiddleWares/autMiddleware.js')
 const router = express.Router();
 
 
@@ -27,14 +27,14 @@ router.post("/register", async (req, res) => {
 
             //send user and token
             res.status(201).json({
-                user:{
+                user: {
                     _id: user._id,
-                name: user.name,
-                email: user.email,
-                password: user.password,
-                role: user.role,
+                    name: user.name,
+                    email: user.email,
+                    password: user.password,
+                    role: user.role,
                 },
-                token,        
+                token,
             }
             )
         })
@@ -49,14 +49,14 @@ router.post("/register", async (req, res) => {
 //@Desc = user Login
 //@Access = Public
 
-router.post("/login" , async (req, res) => {
-    const {email, password} = req.body;
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
     try {
-        let user=await User.findOne({email});
-        if(!user) return res.status(400).json({msg:"Invalid Credential"});
+        let user = await User.findOne({ email });
+        if (!user) return res.status(400).json({ msg: "Invalid Credential" });
 
-        const isMatch=await user.matchPassword(password);
-        if(!isMatch) return res.status(400).json({msg:"Invalid Credential"});
+        const isMatch = await user.matchPassword(password);
+        if (!isMatch) return res.status(400).json({ msg: "Invalid Credential" });
 
         //create payload
         const payload = { user: { id: user.id, role: user.role, } };
@@ -67,14 +67,14 @@ router.post("/login" , async (req, res) => {
 
             //send user and token
             res.json({
-                user:{
+                user: {
                     _id: user._id,
-                name: user.name,
-                email: user.email,
-                password: user.password,
-                role: user.role,
+                    name: user.name,
+                    email: user.email,
+                    password: user.password,
+                    role: user.role,
                 },
-                token,        
+                token,
             }
             )
         })
