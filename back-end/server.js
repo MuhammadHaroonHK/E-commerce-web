@@ -3,6 +3,7 @@ const connectDb=require("./config/connectDb")
 const userRoute= require('./routes/UserRout')
 const productRoute= require('./routes/ProductRout')
 const cartRoute= require('./routes/CartRout')
+const checkoutRoute= require('./routes/CheckoutRout')
 require("dotenv").config();
 
 const app=express()
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoute)
 app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
+app.use("/api/checkout", checkoutRoute)
 
 console.log("server running on " + PORT)
 app.listen(PORT || 3000)
