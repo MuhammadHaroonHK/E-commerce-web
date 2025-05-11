@@ -4,6 +4,7 @@ const userRoute= require('./routes/UserRout')
 const productRoute= require('./routes/ProductRout')
 const cartRoute= require('./routes/CartRout')
 const checkoutRoute= require('./routes/CheckoutRout')
+const orderRoute= require('./routes/OrderRout')
 require("dotenv").config();
 
 const app=express()
@@ -21,6 +22,7 @@ app.use("/api/users", userRoute)
 app.use("/api/products", productRoute)
 app.use("/api/cart", cartRoute)
 app.use("/api/checkout", checkoutRoute)
+app.use("/api/orders", orderRoute)
 
 console.log("server running on " + PORT)
 app.listen(PORT || 3000)
