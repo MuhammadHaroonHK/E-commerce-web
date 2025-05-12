@@ -26,7 +26,7 @@ router.get("/my-order", protect, async (req, res) => {
 //@access = Private
 router.get("/:id", protect, async (req, res) => {
     try {
-        const product=await Order.findById(req.params.id);
+        const product=await Order.findById(req.params.id).papulate("user", "user email");
         if(!product) {
             res.status(400).json({msg : "No product found"})
         }
