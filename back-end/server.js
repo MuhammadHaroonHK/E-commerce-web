@@ -6,6 +6,7 @@ const cartRoute = require('./routes/CartRout')
 const checkoutRoute = require('./routes/CheckoutRout')
 const orderRoute = require('./routes/OrderRout')
 const uploadRoute = require('./routes/UploadRout')
+const subscribeRoute = require('./routes/Subscribe')
 require("dotenv").config();
 
 const app = express()
@@ -25,6 +26,7 @@ app.use("/api/cart", cartRoute)
 app.use("/api/checkout", checkoutRoute)
 app.use("/api/orders", orderRoute)
 app.use("/api/upload", uploadRoute)
+app.use("/api/subscribe", subscribeRoute)
 
 console.log("server running on " + PORT)
 app.listen(PORT || 3000)
