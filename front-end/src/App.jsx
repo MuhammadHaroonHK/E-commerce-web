@@ -17,10 +17,14 @@ import AdminMainContent from "./components/Admin/AdminMainContent"
 import ProductManagement from "./components/Admin/ProductManagement"
 import EditProduct from "./components/Admin/EditProduct"
 import OrderManagement from "./components/Admin/OrderManagement"
+
+import {Provider} from "react-redux"
+import store from "./redux/store"
 function App() {
 
   return (
     <>
+    <Provider store={store}>
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<UserLayout />}>
@@ -45,6 +49,7 @@ function App() {
         </Route>
 
       </Routes>
+      </Provider>
     </>
   )
 }
