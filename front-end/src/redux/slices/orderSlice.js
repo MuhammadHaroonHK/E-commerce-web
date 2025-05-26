@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //to fetch user orders
-export const fetchUserOrder = createAsyncThunk("cart/fetchUserOrder",
+export const fetchUserOrder = createAsyncThunk("order/fetchUserOrder",
     async (checkoutData, { rejectWithValue }) => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/my-orders`,
@@ -22,11 +22,11 @@ export const fetchUserOrder = createAsyncThunk("cart/fetchUserOrder",
 
 
 //to fetch user orders
-export const fetchUserDetails = createAsyncThunk("cart/fetchUserDetails",
+export const fetchUserDetails = createAsyncThunk("order/fetchUserDetails",
     async (fetchUserDetails, { rejectWithValue }) => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/my-orders/${orderId}`,
-                checkoutData,
+                fetchUserDetails,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("userToken")}`
