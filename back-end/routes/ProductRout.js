@@ -11,7 +11,7 @@ router.post("/", protect, admin, async (req, res) => {
         const { name,
             description,
             price,
-            descPrice,
+            discountPrice,
             countInStock,
             sku,
             catagory,
@@ -32,7 +32,7 @@ router.post("/", protect, admin, async (req, res) => {
             name,
             description,
             price,
-            descPrice,
+            discountPrice,
             countInStock,
             sku,
             catagory,
@@ -67,7 +67,7 @@ router.put("/:id", protect, admin, async (req, res) => {
         const { name,
             description,
             price,
-            descPrice,
+            discountPrice,
             countInStock,
             sku,
             catagory,
@@ -89,7 +89,7 @@ router.put("/:id", protect, admin, async (req, res) => {
             product.name = name || product.name;
             product.description = description || product.description;
             product.price = price || product.price;
-            product.descPrice = descPrice || product.descPrice;
+            product.discountPrice = discountPrice || product.discountPrice;
             product.countInStock = countInStock || product.countInStock;
             product.sku = sku || product.sku;
             product.catagory = catagory || product.catagory;
@@ -232,7 +232,7 @@ router.get("/best-seller", async (req, res) => {
 //@route = GET: api/products/new-arrival
 //@desc = getting new products base on createdAt
 //@access = Public
-router.get("/new-arrival", async (req, res) => {
+router.get("/new-arrivals", async (req, res) => {
     try {
         const newArrivals = await Product.find().sort({ createdAt: -1 }).limit(8);
         if (newArrivals) {

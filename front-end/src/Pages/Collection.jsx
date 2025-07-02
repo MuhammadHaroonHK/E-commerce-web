@@ -3,8 +3,22 @@ import Filter from '../components/Commen/Filter';
 import FeaturedCollection from '../Products/FeaturedCollection';
 import { RiFilterLine } from "react-icons/ri";
 import Popularity from '../components/Commen/Popularity';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductsByFilter } from '../redux/slices/productSlice';
 
 const Collection = () => {
+  const {collection} = useParams();
+  const [searchParams] = useSearchParams();
+  const dispatch= useDispatch();
+
+  const {products, loading, error}= useSelector((state)=>state.products);
+  const queryParams=Object.fromEntries([...searchParams]);
+
+  useEffect(() => {
+    dispatch(fetchProductsByFilter({collection, ...queryParams}))
+  }, [dispatch, collection, searchParams])
+
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const filterRef = useRef(null);
 
@@ -56,7 +70,7 @@ const Collection = () => {
         </div>
 
 
-        <FeaturedCollection />
+        <FeaturedCollection products={products} loading={loading} error={error} />
       </div>
     </div>
   );

@@ -67,7 +67,7 @@ router.put("/:id", protect, admin, async (req, res) => {
 
 //@route = delete: api/admin/users/:id
 //@desc = delete user
-//@access = Private/admin
+//@access = Private/admin 
 router.delete("/:id", protect, admin, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);

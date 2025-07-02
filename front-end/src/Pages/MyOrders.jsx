@@ -1,49 +1,27 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserOrder } from '../redux/slices/orderSlice';
+import { useNavigate } from 'react-router-dom';
 
 const MyOrders = () => {
-    const [orders, setOrders] = useState([]);
+    const navigate = useNavigate();
+    const dispatch=useDispatch();
+    const {orders, loading, error}=useSelector((state)=>state.order);
 
-    useEffect(() => {
-        setTimeout(() => {
-            const mockOrder = [
-                {
-                    _id: "123",
-                    cratedAt: new Date(),
-                    shippingAddress: { city: "New York", country: "USA" },
-                    oderItems: [
-                        {
-                            name: "Product 1",
-                            image: "https://picsum.photos/200?random=4"
-                        },
-                    ],
-                    totalPrice: 99,
-                    isPaid: true
-                },
-                {
-                    _id: "456",
-                    cratedAt: new Date(),
-                    shippingAddress: { city: "New York", country: "USA" },
-                    oderItems: [
-                        {
-                            name: "Product 2",
-                            image: "https://picsum.photos/200?random=2"
-                        },
-                    ],
-                    totalPrice: 99,
-                    isPaid: true
-                },
-            ];
-            setOrders(mockOrder);
-        }, 1000);
-
-    }, [])
-
-    const nevigate = useNavigate()
+    useEffect(()=>{
+        dispatch(fetchUserOrder())
+    }, [dispatch])
 
     const handleDetails = (_id) => {
-        nevigate(`/order-details/${_id}`);
+        navigate(`/order-details/${_id}`);
+    }
+
+    if(loading) {
+        return <p>Loading</p>
+    }
+
+    if(error) {
+        return <p>Error: {error}</p>
     }
     return (
         <div>
@@ -66,15 +44,15 @@ const MyOrders = () => {
                             orders.map((order) => (
                                 <tr key={order._id} className='cursor-pointer hover:bg-gray-50 border-b'
                                     onClick={() => handleDetails(order._id)}>
-                                    <td><img src={order.oderItems[0].image} alt={order.oderItems[0].name} className='w-12 h-12 object-cover rounded-lg' /></td>
+                                    <td><img src={order.orderItems[0].image} alt={order.orderItems[0].name} className='w-12 h-12 object-cover rounded-lg' /></td>
                                     <td className='py-2 px-4 sm:py-3'>#{order._id}</td>
 
                                     <td className='py-2 px-4 sm:py-3'>
-                                        {new Date(order.cratedAt).toLocaleDateString()} {" "}
-                                        {new Date(order.cratedAt).toLocaleTimeString()}</td>
+                                        {new Date(order.createdAt).toLocaleDateString()} {" "}
+                                        {new Date(order.createdAt).toLocaleTimeString()}</td>
 
                                     <td className='py-2 px-4 sm:py-3'>{order.shippingAddress ? `${order.shippingAddress.city}, ${order.shippingAddress.country}` : "N/A"}</td>
-                                    <td className='py-2 px-4 sm:py-3'>{order.oderItems.length}</td>
+                                    <td className='py-2 px-4 sm:py-3'>{order.orderItems.length}</td>
                                     <td className='py-2 px-4 sm:py-3'>{order.totalPrice}</td>
                                     <td className='py-2 px-4 sm:py-3'>
                                         <span className={`${order.isPaid ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"} rounded-full px-2 py-1`}>

@@ -20,7 +20,7 @@ export const fetchUsers = createAsyncThunk("admin/fetchUsers",
 export const addUser = createAsyncThunk("admin/addUser",
     async (userData, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users/add`,
                 userData,
                 {
                     headers: {
@@ -46,7 +46,7 @@ export const updateUser = createAsyncThunk("admin/updateUser",
                 }
             }
         );
-        return response.data;
+        return response.data.user;
     }
 );
 

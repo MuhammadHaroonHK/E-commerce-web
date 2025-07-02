@@ -1,10 +1,27 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import { FaInstagram, FaMeta, FaXTwitter } from 'react-icons/fa6';
 import { MdOutlineAddIcCall } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-    return (
+
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('/api/subscribe', { email });
+            setMessage(response.data.msg);
+            setEmail('');
+        } catch (error) {
+            setMessage(error.response?.data?.msg || "An error occurred.");
+        }
+    };
+
+    return ( 
 
         // container
         <div className='bg-gray-100 border-t border-gray-400 xl:p-12 md:p-16 sm:p-16 vsm:p-6 mt-10'>
@@ -19,10 +36,14 @@ const Footer = () => {
                     <p className='mb-4 mt-4'>Sign Up and get 10% off your first order.</p>
 
                     {/* Input form */}
-                    <form className='flex xl:flex-row md:flex-row sm:flex-row vsm:flex-col xl:gap-0 md:gap-0 sm:gap-0 vsm:gap-4'>
-                        <input type="email" placeholder='Enter your Email' required className='border border-gray-600 p-1.5 focus:outline-none rounded-lg sm:rounded-none' />
-                        <button className='bg-black text-white p-1.5 rounded-lg sm:rounded-none'>Subscribe</button>
+                    <form onSubmit={handleSubmit} className='flex xl:flex-row md:flex-row sm:flex-row vsm:flex-col xl:gap-0 md:gap-0 sm:gap-0 vsm:gap-4'>
+                        <input type="email"
+                         value={email}
+                    onChange={(e) => setEmail(e.target.value)} 
+                        placeholder='Enter your Email' required className='border border-gray-600 p-1.5 focus:outline-none rounded-lg sm:rounded-none' />
+                        <button type="submit"  className='bg-black text-white p-1.5 rounded-lg sm:rounded-none'>Subscribe</button>
                     </form>
+                    {message && <p className="mt-2 text-sm text-green-600">{message}</p>}
                 </div>
 
                 {/* Second side */}

@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { MdOutlineClose } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setFilters, fetchProductsByFilter } from '../../redux/slices/productSlice';
 
 const Search = ({ closeSearch }) => {
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
+
 
     const [search, setSearch] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("search", search);
+        dispatch(setFilters({search: search}));
+        dispatch(fetchProductsByFilter({search: search}));
+        navigate(`/collection/all?search=${search}`);
         closeSearch(false)
     }
     return (

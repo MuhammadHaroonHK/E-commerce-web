@@ -8,7 +8,7 @@ const loadCartFromStorage = () => {
 };
 
 //helper function to save cart in local storage
-const saveCartInStorage = () => {
+const saveCartInStorage = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
 };
 
@@ -50,7 +50,7 @@ export const addToCart = createAsyncThunk("cart/addToCart", async ({ productId, 
 //update the quantity in cart
 export const updateCartItemQuantity = createAsyncThunk("cart/updateCartItemQuantity", async ({ productId, quantity, color, size, guestId, userId }, { rejectWithValue }) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/cart`,
+        const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/cart`,
             {
                 productId,
                 quantity,
@@ -69,11 +69,8 @@ export const updateCartItemQuantity = createAsyncThunk("cart/updateCartItemQuant
 //remove item from cart
 export const removeFromCart = createAsyncThunk("cart/removeFromCart", async ({ productId, color, size, guestId, userId }, { rejectWithValue }) => {
     try {
-        const response = await axios({
-            method: "DELETE",
-            url: `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
-            data: { productId, color, size, guestId, userId }
-        })
+        const query = new URLSearchParams({ productId, color, size, guestId, userId }).toString();
+        const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart?${query}`);
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -109,10 +106,19 @@ const cartSlice = createSlice({
     },
 
     reducers: {
-        clearCart:(state) => {
-        state.cart = { products: [] };
-        localStorage.removeItem("cart")
-    }},
+        clearCart: (state) => {
+            state.cart = { products: [] };
+            localStorage.removeItem("cart")
+        },
+
+        removeItemLocally: (state, action) => {
+            const { productId, color, size } = action.payload;
+            state.cart.products = state.cart.products.filter(
+                (item) => !(item.productId === productId && item.color === color && item.size === size)
+            );
+            saveCartInStorage(state.cart);
+        },
+    },
 
     extraReducers: (builder) => {
         builder
@@ -167,9 +173,18 @@ const cartSlice = createSlice({
             })
             .addCase(removeFromCart.fulfilled, (state, action) => {
                 state.loading = false;
-                state.cart = action.payload;
-                saveCartInStorage(action.payload)
+
+                // Check if cart was deleted
+                if (action.payload?.msg === "Product removed and cart deleted because it became empty") {
+                    state.cart = { products: [] }; // reset cart
+                    localStorage.removeItem("cart"); // clear localStorage
+                } else {
+                    // Cart still exists
+                    state.cart = action.payload;
+                    saveCartInStorage(action.payload);
+                }
             })
+
             .addCase(removeFromCart.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload?.message || "Failed to delete item";
@@ -192,5 +207,5 @@ const cartSlice = createSlice({
     }
 });
 
-export const { clearCart } = cartSlice.actions;
+export const { clearCart, removeItemLocally } = cartSlice.actions;
 export default cartSlice.reducer;

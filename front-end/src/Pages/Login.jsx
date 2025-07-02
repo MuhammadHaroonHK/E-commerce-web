@@ -1,17 +1,40 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loginUser } from '../redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { mergeCart } from '../redux/slices/cartSlice'
 
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { user, guestId } = useSelector((state) => state.auth);
+  const { cart } = useSelector((state) => state.cart);
+
+  //get redirct parameter and check if it is checkout
+  const redirct = new URLSearchParams(location.search).get("redirct") || "/";
+  const isCheckoutRedirct = redirct.includes("checkout");
+
+  useEffect(() => {
+    if (user) {
+      if (cart?.products?.length > 0 && guestId) {
+        dispatch(mergeCart({ guestId, user })).then(() => {
+          navigate(isCheckoutRedirct ? "/checkout" : "/")
+        })
+      } else {
+        // Even if there's nothing to merge, still navigate
+        navigate(isCheckoutRedirct ? "/checkout" : "/");
+      }
+    }
+  }, [user, guestId, cart, navigate, isCheckoutRedirct, dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser({email, password}));
+    dispatch(loginUser({ email, password }));
   }
 
   return (
@@ -39,7 +62,8 @@ const Login = () => {
               className='border p-1 rounded-md' />
             <button type='submit' className='bg-black text-white px-6 py-2 rounded-lg text-lg hover:bg-gray-900 my-6 mx-10'>Log In</button>
 
-            <p className='text-center mb-3 text-gray-600'>Don't have account? <Link to='/register' className='text-black'>Register</Link></p>
+            <p className='text-center mb-3 text-gray-600'>Don't have account?
+              <Link to={`/register?redirct=${encodeURIComponent(redirct)}`} className='text-black'>Register</Link></p>
           </form>
         </div>
       </div>

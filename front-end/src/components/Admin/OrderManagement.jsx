@@ -1,40 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { fetchAllOders, updateOrderStatus } from '../../redux/slices/adminOrderSlice';
 
 const OrderManagement = () => {
-    const products = [
-        {
-            _id: 123,
-            name: "Shirt",
-            price: "$79",
-            customer: "Admin User",
-            status: "Processing"
-        },
-        {
-            _id: 456,
-            name: "Shirt",
-            price: "$79",
-            customer: "Admin User",
-            status: "Processing"
-        },
-        {
-            _id: 789,
-            name: "Shirt",
-            price: "$79",
-            customer: "Admin User",
-            status: "Processing"
-        },
-        {
-            _id: 132,
-            name: "Shirt",
-            price: "$79",
-            customer: "Admin User",
-            status: "Processing"
-        },
-    ];
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { user } = useSelector((state) => state.auth);
+    const { orders, loading, error } = useSelector((state) => state.adminOrders);
+
+    useEffect(() => {
+        if (user && user.role !== "admin") {
+            navigate("/");
+        } else {
+            dispatch(fetchAllOders());
+        }
+    }, [dispatch, user, navigate]);
 
     const handleStatus = (orderId, status) => {
-        console.log("ID", orderId, "status", status)
-    }
+        dispatch(updateOrderStatus({ id: orderId, status }))
+            .then(() => dispatch(fetchAllOders()));
+    };
+
+    if (loading) return <p>Loading ...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    console.log(orders)
     return (
         <div className='w-full px-5 sm:px-10 lg:px-20 py-10'>
             <h1 className='font-bold text-2xl'>Orders Management</h1>
@@ -52,16 +43,16 @@ const OrderManagement = () => {
                     </thead>
 
                     <tbody className='text-gray-700'>
-                        {products.length > 0 ? (
-                            products.map((product) => (
-                                <tr key={product._id}
+                        {orders.length > 0 ? (
+                            orders.map((order) => (
+                                <tr key={order._id}
                                     className='hover:bg-gray-50'>
-                                    <td className='border-b px-4 py-2'>{product._id}</td>
-                                    <td className='border-b px-4 py-2'>{product.customer}</td>
-                                    <td className='border-b px-4 py-2'>{product.price}</td>
+                                    <td className='border-b px-4 py-2'>{order._id}</td>
+                                    <td className='border-b px-4 py-2'>{order.user}</td>
+                                    <td className='border-b px-4 py-2'>{order.totalPrice}</td>
                                     <td className='border-b px-4 py-2'>
-                                        <select className='border px-2 py-1' value={product.status}
-                                            onChange={(e) => handleStatus(product._id, e.target.value)}>
+                                        <select className='border px-2 py-1' value={order.status}
+                                            onChange={(e) => handleStatus(order._id, e.target.value)}>
                                             <option value="Processing">Processing</option>
                                             <option value="Shipped">Shipped</option>
                                             <option value="Delivered">Delivered</option>
@@ -70,7 +61,7 @@ const OrderManagement = () => {
                                     </td>
                                     <td className='border-b px-4 py-2'>
                                         <button className='bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-lg'
-                                            onClick={(id) => handleStatus(product._id, "Delevered")}>Mark as Delevered</button>
+                                            onClick={(id) => handleStatus(order._id, "Delivered")}>Mark as Delevered</button>
                                     </td>
                                 </tr>
                             ))

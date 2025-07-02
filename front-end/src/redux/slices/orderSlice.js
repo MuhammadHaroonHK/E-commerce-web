@@ -3,10 +3,9 @@ import axios from "axios";
 
 //to fetch user orders
 export const fetchUserOrder = createAsyncThunk("order/fetchUserOrder",
-    async (checkoutData, { rejectWithValue }) => {
+    async (_,{ rejectWithValue }) => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/my-orders`,
-                checkoutData,
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("userToken")}`
@@ -23,16 +22,13 @@ export const fetchUserOrder = createAsyncThunk("order/fetchUserOrder",
 
 //to fetch user orders
 export const fetchUserDetails = createAsyncThunk("order/fetchUserDetails",
-    async (fetchUserDetails, { rejectWithValue }) => {
+    async (orderId, { rejectWithValue }) => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/my-orders/${orderId}`,
-                fetchUserDetails,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("userToken")}`
-                    }
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`
                 }
-            );
+            });
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -40,11 +36,12 @@ export const fetchUserDetails = createAsyncThunk("order/fetchUserDetails",
     }
 );
 
+
 //create slice
 const orderSlice = createSlice({
     name: "order",
     initialState: {
-        order: [],
+        orders: [],
         totalOrders: 0,
         orderDetails: null,
         loading: false,
@@ -60,12 +57,13 @@ const orderSlice = createSlice({
             })
             .addCase(fetchUserOrder.fulfilled, (state, action) => {
                 state.loading = false;
-                state.order = action.payload;
+                state.orders = action.payload;
             })
             .addCase(fetchUserOrder.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.message;
+                state.error = action.payload?.message || action.error?.message || "Something went wrong";
             })
+
 
             //fetch order details
             .addCase(fetchUserDetails.pending, (state) => {
@@ -78,8 +76,9 @@ const orderSlice = createSlice({
             })
             .addCase(fetchUserDetails.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.message;
+                state.error = action.payload?.message || action.error?.message || "Something went wrong";
             })
+
     }
 });
 

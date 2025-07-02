@@ -1,76 +1,23 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CiSquareChevLeft } from "react-icons/ci";
 import { CiSquareChevRight } from "react-icons/ci";
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 const NewArival = () => {
 
-    const itemsArray = [
-        {
-            _id: 1,
-            name: "Stylish Shirt",
-            price: 15,
-            img: [{
-                url: "https://picsum.photos/500?random=1",
-                alt: ""
-            }]
-        },
-        {
-            _id: 2,
-            name: "Stylish Shirt",
-            price: 15,
-            img: [{
-                url: "https://picsum.photos/200?random=2",
-                alt: ""
-            }]
-        },
-        {
-            _id: 3,
-            name: "Stylish Shirt",
-            price: 15,
-            img: [{
-                url: "https://picsum.photos/200?random=3",
-                alt: ""
-            }]
-        },
-        {
-            _id: 4,
-            name: "Stylish Shirt",
-            price: 15,
-            img: [{
-                url: "https://picsum.photos/200?random=4",
-                alt: ""
-            }]
-        },
-        {
-            _id: 5,
-            name: "Stylish Shirt",
-            price: 15,
-            img: [{
-                url: "https://picsum.photos/200?random=5",
-                alt: ""
-            }]
-        },
-        {
-            _id: 6,
-            name: "Stylish Shirt",
-            price: 15,
-            img: [{
-                url: "https://picsum.photos/200?random=6",
-                alt: ""
-            }]
-        },
-        {
-            _id: 7,
-            name: "Stylish Shirt",
-            price: 15,
-            img: [{
-                url: "https://picsum.photos/200?random=7",
-                alt: ""
-            }]
-        },
-
-    ];
+    const [newArrivals, setNewArrivals] = useState([]);
+    useEffect(()=> {
+        const fetchNewArrivals=async () => {
+            try {
+                const response=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`);
+                setNewArrivals(response.data)
+            } catch (error) {
+                console.error(error)
+            }
+        };
+        fetchNewArrivals()
+    }, [])
 
     const scrollRef = useRef(null);
 
@@ -110,11 +57,11 @@ const NewArival = () => {
 
                     <div ref={scrollRef} className='mx-auto overflow-x-scroll flex flex-row gap-2 p-6 mt-10 scrollcss'>
 
-                        {itemsArray.map((product) => (
+                        {newArrivals.map((product) => (
                             <div key={product._id}>
                                 <div className='min-w-64 h-72 relative'>
                                     <Link to={`/product/${product._id}`}>
-                                        <img src={product.img[0]?.url} alt={product.img[0]?.alt || product.name} className='w-full h-full object-cover' />
+                                        <img src={product.images[0]?.url} alt={product.images[0]?.alt || product.name} className='w-full h-full object-cover' />
                                         <div className='absolute bottom-0 left-0 right-0 backdrop-blur-sm bg-white/30 text-black w-64 p-3'>
                                             <h2 className='font-bold'>{product.name}</h2>
                                             <p>$ {product.price}</p>
