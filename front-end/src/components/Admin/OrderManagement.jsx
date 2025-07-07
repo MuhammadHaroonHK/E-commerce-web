@@ -48,7 +48,7 @@ const OrderManagement = () => {
                                 <tr key={order._id}
                                     className='hover:bg-gray-50'>
                                     <td className='border-b px-4 py-2'>{order._id}</td>
-                                    <td className='border-b px-4 py-2'>{order.user}</td>
+                                    <td className='border-b px-4 py-2'>{user.name}</td>
                                     <td className='border-b px-4 py-2'>{order.totalPrice}</td>
                                     <td className='border-b px-4 py-2'>
                                         <select className='border px-2 py-1' value={order.status}

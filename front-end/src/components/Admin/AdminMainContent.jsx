@@ -5,7 +5,8 @@ import { fetchAdminProducts } from '../../redux/slices/adminProductSlice'
 import { fetchAllOders } from '../../redux/slices/adminOrderSlice'
 
 const AdminMainContent = () => {
-    const dispatch=useDispatch()
+    const dispatch=useDispatch();
+    const { user } = useSelector((state) => state.auth);
     const {products, loading:productsLoading, error:productsError} = useSelector((state)=>state.adminProducts);
     const {orders,totalOrders,totalSales, loading:ordersLoading, error:ordersError} = useSelector((state)=>state.adminOrders);
 
@@ -13,6 +14,8 @@ const AdminMainContent = () => {
         dispatch(fetchAdminProducts());
         dispatch(fetchAllOders());
     },[dispatch]);
+    
+    console.log(orders);
     
     return (
         <div className='w-full px-5 sm:px-10 lg:px-20 py-10'>
@@ -29,20 +32,20 @@ const AdminMainContent = () => {
                     {/* Total Section */}
                     <div className='shadow-lg p-6'>
                         <h2 className='font-semibold text-xl'>Revenue</h2>
-                        <p className='text-xl'>{(totalSales ?? 0).toFixed(2)}</p>
+                        <p className='text-xl'>$ {(totalSales ?? 0).toFixed(2)}</p>
 
                     </div>
 
                     <div className='shadow-lg p-6'>
                         <h2 className='font-semibold text-xl'>Total Orders</h2>
                         <p className='text-xl'>{totalOrders}</p>
-                        <Link className='text-blue-600 hover:underline'>Manage Orders</Link>
+                        <Link to={"/admin/orders"} className='text-blue-600 hover:underline'>Manage Orders</Link>
                     </div>
 
                     <div className='shadow-lg p-6'>
                         <h2 className='font-semibold text-xl'>Total Products</h2>
                         <p className='text-xl'>{products.length}</p>
-                        <Link className='text-blue-600 hover:underline'>Manage Products</Link>
+                        <Link to={"/admin/products"} className='text-blue-600 hover:underline'>Manage Products</Link>
                     </div>
                 </div>
             )}
@@ -65,7 +68,7 @@ const AdminMainContent = () => {
                             orders.map((order) => (
                                 <tr key={order._id}>
                                     <td className='border-b px-4 py-2'>{order._id}</td>
-                                    <td className='border-b px-4 py-2'>{order.user}</td>
+                                    <td className='border-b px-4 py-2'>{user.name}</td>
                                     <td className='border-b px-4 py-2'>$ {order.totalPrice}</td>
                                     <td className='border-b px-4 py-2'>{order.status}</td>
                                 </tr>
