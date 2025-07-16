@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://MuhammadHaroonHK.github.io/E-commerce-web",
+  "homepage": "https://e-commerce-web-6z3q.vercel.app/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
