@@ -25,7 +25,7 @@ const Hero = () => {
 
               {/* button */}
               <div>
-                <Link to="#" className='bg-white text-black px-6 py-2 rounded-sm text-lg hover:bg-gray-900 hover:text-white'>Shop Now</Link>
+                <Link to="/collection/all" className='bg-white text-black px-6 py-2 rounded-sm text-lg hover:bg-gray-900 hover:text-white'>Shop Now</Link>
               </div>
             </div>
 

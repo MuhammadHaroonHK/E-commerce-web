@@ -9,8 +9,8 @@ const Filter = () => {
     const gender = ["Men", "Women"];
     const colors = ["blue", "black", "green", "yellow", "red"];
     const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
-    const materiale = ["Cooton", "Whool", "Leadher", "Polyster"];
-    const brands = ["Addidas", "Nike", "PUMA", "J."];
+    const materiale = ["Cotton", "Cotton Blend", "Denim", "Viscose", "Fleece"];
+    const brands = ["Urban Threads", "Modern Fit", "Street Style", "Beach Breeze", "Urban Chic", "Polo Classics", "Street Vibes", "Heritage Wear", "Winter Basics", "Everyday Comfort","ActiveWear","UrbanStyle","ChillZone",];
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [filter, setFilter] = useState({
