@@ -7,7 +7,7 @@ import ScrollToTop from "./ScrollToTop"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/E-commerce-web">
+    <BrowserRouter>
     <ScrollToTop/>
       <App />
     </BrowserRouter>
