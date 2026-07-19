@@ -16,6 +16,7 @@ import UserMange from "./components/Admin/UserMange"
 import AdminMainContent from "./components/Admin/AdminMainContent"
 import ProductManagement from "./components/Admin/ProductManagement"
 import EditProduct from "./components/Admin/EditProduct"
+import AddProduct from "./components/Admin/AddProduct"
 import OrderManagement from "./components/Admin/OrderManagement"
 
 import {Provider} from "react-redux"
@@ -45,6 +46,7 @@ function App() {
           <Route index element={<AdminMainContent />} />
           <Route path="users" element={<UserMange />} />
           <Route path="products" element={<ProductManagement />} />
+          <Route path="products/add" element={<AddProduct />} />
           <Route path="products/:id/edit" element={<EditProduct />} />
           <Route path="Orders" element={<OrderManagement />} />
         </Route>

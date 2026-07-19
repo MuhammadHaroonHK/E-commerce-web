@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteProduct, fetchAdminProducts } from '../../redux/slices/adminProductSlice';
@@ -10,10 +10,6 @@ const ProductManagement = () => {
         dispatch(fetchAdminProducts())
     },[dispatch])
 
-    const hadleEdit = (id) => {
-        console.log("Edit id:", id)
-    }
-
     const hadleDelete = (id) => {
         if(window.confirm("Are you sure to delete this product")) {
             dispatch(deleteProduct(id));
@@ -24,7 +20,10 @@ const ProductManagement = () => {
     if(error) return <p>Error {error}</p>
     return (
         <div className='w-full px-5 sm:px-10 lg:px-20 py-10'>
-            <h1 className='font-bold text-2xl'>Products Management</h1>
+            <div className='flex items-center justify-between gap-4'>
+                <h1 className='font-bold text-2xl'>Products Management</h1>
+                <Link to="/admin/products/add" className='rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700'>Add Product</Link>
+            </div>
 
             <div className='min-w-full mx-auto p-2 mt-6 sm:mt-2 sm:p-6 overflow-x-auto'>
                 <table className='min-w-full text-left whitespace-nowrap'>
@@ -52,7 +51,7 @@ const ProductManagement = () => {
                                         >Edit
                                         </Link>
                                         <button className='bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg'
-                                            onClick={(id) => hadleDelete(product._id)}>Delete</button>
+                                            onClick={() => hadleDelete(product._id)}>Delete</button>
                                     </td>
                                 </tr>
                             ))
