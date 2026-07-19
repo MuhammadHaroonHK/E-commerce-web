@@ -119,12 +119,16 @@ const AddProduct = () => {
     <div className="w-full px-5 py-10 sm:px-10 lg:px-20">
       <h1 className="text-2xl font-bold">Add Product</h1>
       <form onSubmit={submit} className="mt-6 max-w-3xl space-y-4">
+        <p className="rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm text-gray-700">
+          Fields marked <span className="font-semibold text-red-600">*</span> are required. Fields with <span className="font-semibold text-gray-500">(optional)</span> can be left empty.
+        </p>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
             label="Name"
             name="name"
             value={productData.name}
             onChange={changeField}
+            placeholder="e.g. Slim-Fit Cotton Shirt"
             required
           />
           <Field
@@ -132,6 +136,7 @@ const AddProduct = () => {
             name="sku"
             value={productData.sku}
             onChange={changeField}
+            placeholder="e.g. SFC-SHIRT-001"
             required
           />
           <Field
@@ -142,6 +147,7 @@ const AddProduct = () => {
             step="0.01"
             value={productData.price}
             onChange={changeField}
+            placeholder="e.g. 34.99"
             required
           />
           <Field
@@ -152,6 +158,9 @@ const AddProduct = () => {
             step="0.01"
             value={productData.discountPrice}
             onChange={changeField}
+            placeholder="e.g. 29.99"
+            helperText="Leave empty when there is no sale price."
+            optional
           />
           <Field
             label="Stock quantity"
@@ -160,6 +169,7 @@ const AddProduct = () => {
             min="0"
             value={productData.countInStock}
             onChange={changeField}
+            placeholder="e.g. 50"
             required
           />
           <Field
@@ -167,6 +177,7 @@ const AddProduct = () => {
             name="catagory"
             value={productData.catagory}
             onChange={changeField}
+            placeholder="e.g. Top Wear"
             required
           />
           <Field
@@ -174,12 +185,15 @@ const AddProduct = () => {
             name="brand"
             value={productData.brand}
             onChange={changeField}
+            placeholder="e.g. Urban Chic"
+            optional
           />
           <Field
             label="Collection"
             name="collections"
             value={productData.collections}
             onChange={changeField}
+            placeholder="e.g. Summer Essentials"
             required
           />
           <Field
@@ -187,7 +201,8 @@ const AddProduct = () => {
             name="sizes"
             value={productData.sizes.join(", ")}
             onChange={(event) => changeList("sizes", event.target.value)}
-            placeholder="S, M, L"
+            placeholder="e.g. S, M, L, XL"
+            helperText="Separate each size with a comma."
             required
           />
           <Field
@@ -195,7 +210,8 @@ const AddProduct = () => {
             name="colors"
             value={productData.colors.join(", ")}
             onChange={(event) => changeList("colors", event.target.value)}
-            placeholder="Black, White"
+            placeholder="e.g. Black, White, Navy"
+            helperText="Separate each color with a comma."
             required
           />
           <Field
@@ -203,13 +219,17 @@ const AddProduct = () => {
             name="material"
             value={productData.material}
             onChange={changeField}
+            placeholder="e.g. 100% Cotton"
+            optional
           />
           <Field
             label="Tags"
             name="tage"
             value={productData.tage}
             onChange={changeField}
-            placeholder="summer, casual"
+            placeholder="e.g. summer, casual, office"
+            helperText="Separate each tag with a comma."
+            optional
           />
           <Field
             label="Weight (kg)"
@@ -219,9 +239,13 @@ const AddProduct = () => {
             step="0.01"
             value={productData.weight}
             onChange={changeField}
+            placeholder="e.g. 0.35"
+            optional
           />
-          <label className="flex flex-col gap-1 text-sm font-medium">
-            Gender
+          <label className="flex flex-col gap-1 text-sm font-medium text-gray-800">
+            <span className="flex items-center gap-2">
+              Gender <span className="text-xs font-normal text-gray-500">(optional)</span>
+            </span>
             <select
               name="gender"
               value={productData.gender}
@@ -234,19 +258,27 @@ const AddProduct = () => {
             </select>
           </label>
         </div>
-        <label className="flex flex-col gap-1 text-sm font-medium">
-          Description
+        <label className="flex flex-col gap-1 text-sm font-medium text-gray-800">
+          <span className="flex items-center gap-2">
+            Description <span className="text-red-600">*</span>
+          </span>
           <textarea
             name="description"
             rows="4"
             value={productData.description}
             onChange={changeField}
             required
+            placeholder="Describe the fit, fabric, key features, and ideal use of this product."
             className="rounded border p-2 font-normal"
           />
         </label>
         <div>
-          <label className="text-sm font-medium">Product images</label>
+          <label className="text-sm font-medium text-gray-800">
+            <span className="flex items-center gap-2">
+              Product images <span className="text-red-600">*</span>
+            </span>
+          </label>
+          <p className="mt-1 text-xs text-gray-500">Upload at least one clear product image. You can add more than one image.</p>
           <input
             type="file"
             accept="image/*"
@@ -276,24 +308,24 @@ const AddProduct = () => {
             ))}
           </div>
         </div>
-        <div className="flex gap-6">
-          <label>
+        <div className="flex gap-6 text-sm">
+          <label className="flex items-center gap-2">
             <input
               type="checkbox"
               name="isPublished"
               checked={productData.isPublished}
               onChange={changeField}
-            />{" "}
-            Published
+            />
+            Published <span className="text-xs text-gray-500">(optional)</span>
           </label>
-          <label>
+          <label className="flex items-center gap-2">
             <input
               type="checkbox"
               name="isFeatured"
               checked={productData.isFeatured}
               onChange={changeField}
-            />{" "}
-            Featured
+            />
+            Featured <span className="text-xs text-gray-500">(optional)</span>
           </label>
         </div>
         <button
@@ -309,10 +341,15 @@ const AddProduct = () => {
 };
 
 // eslint-disable-next-line react/prop-types
-const Field = ({ label, ...props }) => (
-  <label className="flex flex-col gap-1 text-sm font-medium">
-    {label}
-    <input {...props} className="rounded border p-2 font-normal" />
+const Field = ({ label, helperText, required, optional, ...props }) => (
+  <label className="flex flex-col gap-1 text-sm font-medium text-gray-800">
+    <span className="flex items-center gap-1">
+      {label}
+      {required && <span className="text-red-600">*</span>}
+      {optional && <span className="text-xs font-normal text-gray-500">(optional)</span>}
+    </span>
+    <input {...props} required={required} className="rounded border p-2 font-normal placeholder:text-gray-400" />
+    {helperText && <span className="text-xs font-normal text-gray-500">{helperText}</span>}
   </label>
 );
 
