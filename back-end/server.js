@@ -15,10 +15,18 @@ require("dotenv").config();
 
 const app = express()
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+}));
 const PORT = process.env.PORT;
 
-connectDb();
+// Reuse the database connection between Vercel function invocations.
+// Starting the connection here makes the app work both locally and on Vercel.
+connectDb().catch((error) => {
+    console.error("The API could not connect to MongoDB:", error.message);
+});
 app.get("/", (req, res) => {
     res.send("Wellcome to Rabbit")
 })
@@ -38,5 +46,13 @@ app.use("/api/admin/products", adminProductRoute)
 app.use("/api/admin/orders", adminOrderRoute)
 
 
-console.log("server running on " + PORT)
-app.listen(PORT || 3000)
+// Vercel imports this Express app as a serverless function. Only listen when
+// this file is started directly for local development.
+if (require.main === module) {
+    const localPort = PORT || 3000;
+    app.listen(localPort, () => {
+        console.log("Server running on " + localPort);
+    });
+}
+
+module.exports = app;

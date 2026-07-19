@@ -1,13 +1,26 @@
 const mongoose = require("mongoose")
 require("dotenv").config();
-const URI = process.env.DB_URI;
 
 const connectDb = async () => {
+    const URI = process.env.DB_URI;
+
+    if (!URI) {
+        throw new Error("DB_URI is not configured");
+    }
+
+    if (mongoose.connection.readyState === 1) {
+        return mongoose.connection;
+    }
+
     try {
-        await mongoose.connect(URI);
+        await mongoose.connect(URI, {
+            serverSelectionTimeoutMS: 10000,
+        });
         console.log("Database connected...")
+        return mongoose.connection;
     } catch (error) {
-        console.log("connection Failed...", error)
+        console.error("Database connection failed:", error.message);
+        throw error;
     }
 }
 
