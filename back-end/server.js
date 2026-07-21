@@ -22,8 +22,6 @@ app.use(cors({
 }));
 const PORT = process.env.PORT;
 
-// Reuse the database connection between Vercel function invocations.
-// Starting the connection here makes the app work both locally and on Vercel.
 connectDb().catch((error) => {
     console.error("The API could not connect to MongoDB:", error.message);
 });
@@ -45,9 +43,6 @@ app.use("/api/admin/users", adminUserRoute)
 app.use("/api/admin/products", adminProductRoute)
 app.use("/api/admin/orders", adminOrderRoute)
 
-
-// Vercel imports this Express app as a serverless function. Only listen when
-// this file is started directly for local development.
 if (require.main === module) {
     const localPort = PORT || 3000;
     app.listen(localPort, () => {
@@ -56,5 +51,3 @@ if (require.main === module) {
 }
 
 module.exports = app;
-
-//writing for commit
