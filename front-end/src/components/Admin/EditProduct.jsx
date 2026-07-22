@@ -1,41 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { fetchProductDetails, updateProduct } from '../../redux/slices/productSlice';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  fetchProductDetails,
+  updateProduct,
+} from "../../redux/slices/productSlice";
+import axios from "axios";
 const EditProduct = () => {
-
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
-  const{id}=useParams()
-  const {selectedProduct, loading, error}=useSelector((state)=>state.products)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { selectedProduct, loading, error } = useSelector(
+    (state) => state.products,
+  );
 
   const [productData, setProductData] = useState({
-    name: '',
-    description: '',
+    name: "",
+    description: "",
     price: 0,
     countInStock: 0,
-    sku: '',
-    category: '',
-    brand: '',
+    sku: "",
+    category: "",
+    brand: "",
     sizes: [],
     colors: [],
-    collections: '',
-    material: '',
-    gender: '',
-    images: []
+    collections: "",
+    material: "",
+    gender: "",
+    images: [],
   });
 
-  const [uploading, setUploading]=useState(false) //image uploading
+  const [uploading, setUploading] = useState(false); //image uploading
 
-  useEffect(()=>{
-    if(id) {
-      dispatch(fetchProductDetails(id))
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchProductDetails(id));
     }
   }, [dispatch, id]);
 
-  useEffect(()=>{
-    if(selectedProduct) {
+  useEffect(() => {
+    if (selectedProduct) {
       setProductData(selectedProduct);
     }
   }, [selectedProduct]);
@@ -44,43 +48,45 @@ const EditProduct = () => {
     const { name, value } = e.target;
     setProductData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleImage = async (e) => {
     const file = e.target.files[0];
-    const formData=new FormData();
+    const formData = new FormData();
     formData.append("image", file);
 
     try {
       setUploading(true);
-      const {data}=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/upload`, 
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/upload`,
         formData,
-      {
-        headers:{
-          "Content-Type": "multipart/form-data"
-        }
-      } );
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
       setProductData((prevData) => ({
         ...prevData,
-        images:[...prevData.images, {url:data.url, altText:""}]
+        images: [...prevData.images, { url: data.url, altText: "" }],
       }));
       setUploading(false);
     } catch (error) {
       console.error(error);
-      setUploading(false)
+      setUploading(false);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateProduct({ id, productDetails: productData }));
-    navigate("/admin/products")
+    navigate("/admin/products");
   };
 
-  if(loading) return <p>Loading...</p>
-  if(error) return <p>Error: {error}</p>
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="w-full px-5 sm:px-10 lg:px-20 py-10">
@@ -88,7 +94,8 @@ const EditProduct = () => {
 
       <form onSubmit={handleSubmit}>
         {/* Name */}
-        <label htmlFor="name">Name</label><br />
+        <label htmlFor="name">Name</label>
+        <br />
         <input
           type="text"
           placeholder="Name of Product"
@@ -100,7 +107,8 @@ const EditProduct = () => {
         />
 
         {/* Description */}
-        <label htmlFor="description">Description</label><br />
+        <label htmlFor="description">Description</label>
+        <br />
         <textarea
           placeholder="Description of Product"
           rows={4}
@@ -112,7 +120,8 @@ const EditProduct = () => {
         />
 
         {/* Price */}
-        <label htmlFor="price">Price</label><br />
+        <label htmlFor="price">Price</label>
+        <br />
         <input
           type="number"
           placeholder="Price of Product"
@@ -124,7 +133,8 @@ const EditProduct = () => {
         />
 
         {/* Count In Stock */}
-        <label htmlFor="countInStock">Count In Stock</label><br />
+        <label htmlFor="countInStock">Count In Stock</label>
+        <br />
         <input
           type="number"
           placeholder="Count of Product"
@@ -136,7 +146,8 @@ const EditProduct = () => {
         />
 
         {/* SKU */}
-        <label htmlFor="sku">SKU</label><br />
+        <label htmlFor="sku">SKU</label>
+        <br />
         <input
           type="text"
           placeholder="SKU of Product"
@@ -148,41 +159,44 @@ const EditProduct = () => {
         />
 
         {/* Sizes */}
-        <label htmlFor="sizes">Sizes</label><br />
+        <label htmlFor="sizes">Sizes</label>
+        <br />
         <input
           type="text"
           placeholder="Sizes of Product (comma separated)"
-          value={productData.sizes.join(', ')}
+          value={productData.sizes.join(", ")}
           required
           name="sizes"
           onChange={(e) =>
             setProductData({
               ...productData,
-              sizes: e.target.value.split(',').map((size) => size.trim())
+              sizes: e.target.value.split(",").map((size) => size.trim()),
             })
           }
           className="border w-full p-2 mb-4 rounded"
         />
 
         {/* Colors */}
-        <label htmlFor="colors">Colors</label><br />
+        <label htmlFor="colors">Colors</label>
+        <br />
         <input
           type="text"
           placeholder="Colors of Product (comma separated)"
-          value={productData.colors.join(', ')}
+          value={productData.colors.join(", ")}
           required
           name="colors"
           onChange={(e) =>
             setProductData({
               ...productData,
-              colors: e.target.value.split(',').map((color) => color.trim())
+              colors: e.target.value.split(",").map((color) => color.trim()),
             })
           }
           className="border w-full p-2 mb-4 rounded"
         />
 
         {/* Image Upload */}
-        <label htmlFor="image">Upload Image</label><br />
+        <label htmlFor="image">Upload Image</label>
+        <br />
         <input
           type="file"
           name="image"

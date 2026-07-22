@@ -120,7 +120,10 @@ const AddProduct = () => {
       <h1 className="text-2xl font-bold">Add Product</h1>
       <form onSubmit={submit} className="mt-6 max-w-3xl space-y-4">
         <p className="rounded-md border border-blue-100 bg-blue-50 px-3 py-2 text-sm text-gray-700">
-          Fields marked <span className="font-semibold text-red-600">*</span> are required. Fields with <span className="font-semibold text-gray-500">(optional)</span> can be left empty.
+          Fields marked <span className="font-semibold text-red-600">*</span>{" "}
+          are required. Fields with{" "}
+          <span className="font-semibold text-gray-500">(optional)</span> can be
+          left empty.
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
@@ -244,7 +247,10 @@ const AddProduct = () => {
           />
           <label className="flex flex-col gap-1 text-sm font-medium text-gray-800">
             <span className="flex items-center gap-2">
-              Gender <span className="text-xs font-normal text-gray-500">(optional)</span>
+              Gender{" "}
+              <span className="text-xs font-normal text-gray-500">
+                (optional)
+              </span>
             </span>
             <select
               name="gender"
@@ -278,7 +284,10 @@ const AddProduct = () => {
               Product images <span className="text-red-600">*</span>
             </span>
           </label>
-          <p className="mt-1 text-xs text-gray-500">Upload at least one clear product image. You can add more than one image.</p>
+          <p className="mt-1 text-xs text-gray-500">
+            Upload at least one clear product image. You can add more than one
+            image.
+          </p>
           <input
             type="file"
             accept="image/*"
@@ -346,10 +355,18 @@ const Field = ({ label, helperText, required, optional, ...props }) => (
     <span className="flex items-center gap-1">
       {label}
       {required && <span className="text-red-600">*</span>}
-      {optional && <span className="text-xs font-normal text-gray-500">(optional)</span>}
+      {optional && (
+        <span className="text-xs font-normal text-gray-500">(optional)</span>
+      )}
     </span>
-    <input {...props} required={required} className="rounded border p-2 font-normal placeholder:text-gray-400" />
-    {helperText && <span className="text-xs font-normal text-gray-500">{helperText}</span>}
+    <input
+      {...props}
+      required={required}
+      className="rounded border p-2 font-normal placeholder:text-gray-400"
+    />
+    {helperText && (
+      <span className="text-xs font-normal text-gray-500">{helperText}</span>
+    )}
   </label>
 );
 

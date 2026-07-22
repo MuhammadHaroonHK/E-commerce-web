@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { addUser, deleteUser, fetchUsers, updateUser } from '../../redux/slices/adminSlice';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  addUser,
+  deleteUser,
+  fetchUsers,
+  updateUser,
+} from "../../redux/slices/adminSlice";
 
 const UserManage = () => {
   const dispatch = useDispatch();
@@ -10,22 +15,22 @@ const UserManage = () => {
   const { users, loading, error } = useSelector((state) => state.admin);
 
   useEffect(() => {
-    if (user && user.role !== 'admin') {
-      navigate('/');
+    if (user && user.role !== "admin") {
+      navigate("/");
     }
   }, [user, navigate]);
-  
+
   useEffect(() => {
-    if (user && user.role !== 'admin') {
+    if (user && user.role !== "admin") {
       dispatch(fetchUsers());
     }
   }, [user, navigate]);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: 'customer',
+    name: "",
+    email: "",
+    password: "",
+    role: "customer",
   });
 
   const { name, email, password, role } = formData;
@@ -41,15 +46,15 @@ const UserManage = () => {
     e.preventDefault();
     dispatch(addUser(formData));
     setFormData({
-      name: '',
-      email: '',
-      password: '',
-      role: 'customer',
+      name: "",
+      email: "",
+      password: "",
+      role: "customer",
     });
   };
 
   const handleDelete = (userId) => {
-    if (window.confirm('Are you sure to delete the user?')) {
+    if (window.confirm("Are you sure to delete the user?")) {
       dispatch(deleteUser(userId));
     }
   };
@@ -109,7 +114,9 @@ const UserManage = () => {
           <option value="Admin">Admin</option>
         </select>
 
-        <button className="bg-green-500 text-white px-4 py-2 rounded-lg">Add User</button>
+        <button className="bg-green-500 text-white px-4 py-2 rounded-lg">
+          Add User
+        </button>
       </form>
 
       {/* User Table */}
