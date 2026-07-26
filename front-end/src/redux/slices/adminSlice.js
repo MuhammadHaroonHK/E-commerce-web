@@ -3,16 +3,17 @@ import axios from "axios";
 
 //fetch all users (admin only)
 export const fetchUsers = createAsyncThunk("admin/fetchUsers",
-    async () => {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
-            checkoutData,
-            {
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("userToken")}`
                 }
-            }
-        );
-        return response.data;
+            });
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || { msg: "Could not load users" });
+        }
     }
 );
 
@@ -52,15 +53,17 @@ export const updateUser = createAsyncThunk("admin/updateUser",
 
 //delete user action
 export const deleteUser = createAsyncThunk("admin/deleteUser",
-    async (id) => {
-        const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`,
-            {
+    async (id, { rejectWithValue }) => {
+        try {
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("userToken")}`
                 }
-            }
-        );
-        return id;
+            });
+            return id;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || { msg: "Could not delete user" });
+        }
     }
 );
 
@@ -85,7 +88,7 @@ const adminSlice = createSlice({
             })
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message;
+                state.error = action.payload?.msg || action.error.message;
             })
 
             //update user
@@ -103,6 +106,9 @@ const adminSlice = createSlice({
             //delete user
             .addCase(deleteUser.fulfilled, (state, action) => {
                 state.users=state.users.filter((user) => user._id !== action.payload)
+            })
+            .addCase(deleteUser.rejected, (state, action) => {
+                state.error = action.payload?.msg || action.error.message;
             })
 
             //add user

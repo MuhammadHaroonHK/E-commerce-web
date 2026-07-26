@@ -8,10 +8,7 @@ const router = express.Router()
 //@access = Private/admin
 router.get("/", protect, admin, async (req, res) => {
     try {
-        const users = await User.find({});
-        if (!users) {
-            res.status(400).json({ msg: "No user found" })
-        }
+        const users = await User.find({}).select("-password");
         res.status(200).json(users)
     } catch (error) {
         console.error(error);
@@ -27,7 +24,7 @@ router.post("/add", protect, admin, async (req, res) => {
     try {
         let user = await User.findOne({ email });
         if (user) {
-            res.status(400).json({ msg: "User already exist" });
+            return res.status(400).json({ msg: "User already exist" });
         }
 
         //add new user
@@ -70,13 +67,11 @@ router.put("/:id", protect, admin, async (req, res) => {
 //@access = Private/admin 
 router.delete("/:id", protect, admin, async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        if (user) {
-            await User.deleteOne();
-            res.status(200).json({ msg: "user deleted successfully", user: user })
-        } else {
-            res.status(400).json({ msg: "User not found" });
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) {
+            return res.status(404).json({ msg: "User not found" });
         }
+        res.status(200).json({ msg: "User deleted successfully" });
 
     } catch (error) {
         console.error(error);

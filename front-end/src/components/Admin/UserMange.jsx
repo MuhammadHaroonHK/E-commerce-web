@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   addUser,
   deleteUser,
   fetchUsers,
-  updateUser,
 } from "../../redux/slices/adminSlice";
 
 const UserManage = () => {
@@ -21,10 +20,10 @@ const UserManage = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    if (user && user.role !== "admin") {
+    if (user?.role === "admin") {
       dispatch(fetchUsers());
     }
-  }, [user, navigate]);
+  }, [user, dispatch]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -53,9 +52,9 @@ const UserManage = () => {
     });
   };
 
-  const handleDelete = (userId) => {
+  const handleDelete = async (userId) => {
     if (window.confirm("Are you sure to delete the user?")) {
-      dispatch(deleteUser(userId));
+      await dispatch(deleteUser(userId));
     }
   };
 
@@ -110,8 +109,8 @@ const UserManage = () => {
           className="border w-full p-2 mb-4 rounded"
           required
         >
-          <option value="Customer">Customer</option>
-          <option value="Admin">Admin</option>
+          <option value="customer">Customer</option>
+          <option value="admin">Admin</option>
         </select>
 
         <button className="bg-green-500 text-white px-4 py-2 rounded-lg">
