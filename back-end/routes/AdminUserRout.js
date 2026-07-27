@@ -1,81 +1,82 @@
-const express = require('express')
-const User = require('../models/User')
-const { protect, admin } = require('../MiddleWares/autMiddleware')
-const router = express.Router()
+const express = require("express");
+const User = require("../models/User");
+const { protect, admin } = require("../MiddleWares/autMiddleware");
+const router = express.Router();
 
 //@route = get: api/admin/users
 //@desc = get all users
 //@access = Private/admin
 router.get("/", protect, admin, async (req, res) => {
-    try {
-        const users = await User.find({}).select("-password");
-        res.status(200).json(users)
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: "Server Error" })
-    }
+  try {
+    const users = await User.find({}).select("-password");
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server Error" });
+  }
 });
 
 //@route = post: api/admin/users/add
 //@desc = add users
 //@access = Private/admin
 router.post("/add", protect, admin, async (req, res) => {
-    const { name, email, role, password } = req.body;
-    try {
-        let user = await User.findOne({ email });
-        if (user) {
-            return res.status(400).json({ msg: "User already exist" });
-        }
-
-        //add new user
-        user = new User({
-            name,
-            email,
-            password,
-            role: role || "customer",
-        });
-        await user.save();
-        res.status(200).json({ user });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: "Server Error" })
+  const { name, email, role, password } = req.body;
+  try {
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ msg: "User already exist" });
     }
+
+    //add new user
+    user = new User({
+      name,
+      email,
+      password,
+      role: role || "customer",
+    });
+    await user.save();
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server Error" });
+  }
 });
 
 //@route = put: api/admin/users/:id
 //@desc = add users
 //@access = Private/admin
 router.put("/:id", protect, admin, async (req, res) => {
-    try {
-        let user = await User.findById(req.params.id);
-        if (user) {
-            user.name = req.body.name || user.name;
-            user.email = req.body.email || user.email;
-            user.role = req.body.role || user.role;
-        }
-
-        const updatedUser = await user.save();
-        res.status(200).json({ msg: "user updated successfully", user: updatedUser })
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: "Server Error" })
+  try {
+    let user = await User.findById(req.params.id);
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+      user.role = req.body.role || user.role;
     }
+
+    const updatedUser = await user.save();
+    res
+      .status(200)
+      .json({ msg: "user updated successfully", user: updatedUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server Error" });
+  }
 });
 
 //@route = delete: api/admin/users/:id
 //@desc = delete user
-//@access = Private/admin 
+//@access = Private/admin
 router.delete("/:id", protect, admin, async (req, res) => {
-    try {
-        const user = await User.findByIdAndDelete(req.params.id);
-        if (!user) {
-            return res.status(404).json({ msg: "User not found" });
-        }
-        res.status(200).json({ msg: "User deleted successfully" });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: "Server Error" })
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
     }
-})
+    res.status(200).json({ msg: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server Error" });
+  }
+});
 module.exports = router;
